@@ -11,7 +11,7 @@ import Moya
 enum DevPeopleAPI {
     case createUser(email: String, password: String, name: String)
     case signIn(email: String, password: String)
-    case requestLogo(websiteURL: String, websiteToken: String)
+    case logo(websiteURL: String, token: String)
 }
 
 extension DevPeopleAPI: TargetType {
@@ -26,7 +26,7 @@ extension DevPeopleAPI: TargetType {
             return "/register"
         case .signIn:
             return "/login"
-        case .requestLogo(let websiteURL, _):
+        case .logo(let websiteURL, _):
             return "/logo/\(websiteURL)"
         }
     }
@@ -35,7 +35,7 @@ extension DevPeopleAPI: TargetType {
         switch self {
         case .createUser, .signIn:
             return .post
-        case .requestLogo:
+        case .logo:
             return .get
         }
     }
@@ -54,10 +54,10 @@ extension DevPeopleAPI: TargetType {
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .signIn(let email, let password):
             var parameters: [String: Any] = [:]
-            parameters["login"] = email
+            parameters["email"] = email
             parameters["password"] = password
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .requestLogo:
+        case .logo:
             return .requestPlain
         }
     }
@@ -65,9 +65,9 @@ extension DevPeopleAPI: TargetType {
     var headers: [String : String]? {
         switch self {
         case .createUser, .signIn:
-            return ["Content-type": "application/json"]
-        case .requestLogo(_, let websiteToken):
-            return ["authorization": websiteToken]
+            return ["content-type": "application/json"]
+        case .logo(_, let token):
+            return ["authorization": token]
         }
     }
     

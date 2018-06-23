@@ -9,5 +9,5 @@
 import Foundation
 
 struct Constants {
-    static let baseUrl = "https://dev.people.com.ai/mobile/api/v2/"
+    static let baseUrl = "https://dev.people.com.ai/mobile/api/v2"
 }

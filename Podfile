@@ -7,6 +7,7 @@ target 'Your Key Manager' do
 
   # Pods for Your Key Manager
   pod ‘RxSwift’
+  pod ‘Moya/RxSwift’
   pod ‘RxCocoa’
   pod ‘Moya’
 
