@@ -97,7 +97,10 @@
 		55F96D9720DDB592004B960D /* Your Key Manager */ = {
 			isa = PBXGroup;
 			children = (
+				55F96DC720DDB5B5004B960D /* View */,
+				55F96DC620DDB5A5004B960D /* Model */,
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
+				55F96DC820DDB5BF004B960D /* ViewModel */,
 				55F96D9A20DDB592004B960D /* ViewController.swift */,
 				55F96D9C20DDB592004B960D /* Main.storyboard */,
 				55F96D9F20DDB592004B960D /* Assets.xcassets */,
@@ -123,6 +126,27 @@
 				55F96DBA20DDB592004B960D /* Info.plist */,
 			);
 			path = "Your Key ManagerUITests";
+			sourceTree = "<group>";
+		};
+		55F96DC620DDB5A5004B960D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55F96DC720DDB5B5004B960D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55F96DC820DDB5BF004B960D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
