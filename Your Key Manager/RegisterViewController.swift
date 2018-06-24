@@ -1,37 +1,34 @@
 //
-//  ViewController.swift
-//  Your Key Manager
+//  RegisterViewController.swift
+//  
 //
-//  Created by Danilo Henrique on 22/06/18.
-//  Copyright © 2018 Danilo Henrique. All rights reserved.
+//  Created by Danilo Henrique on 23/06/18.
 //
 
 import UIKit
 import RxSwift
-import RxCocoa
 
-class LoginViewController: UIViewController {
+class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
     
-    let viewModel = LoginViewModel()
+    let viewModel = RegisterViewModel()
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupReactiveBinds()
-        setupSignInButton()
-        setupRegisterButton()
+        setupCreateAccountButton()
         setupEmailFieldField()
         setupPasswordTextField()
         
     }
-
+    
     func setupReactiveBinds(){
         emailTextField.rx.text
             .orEmpty
@@ -43,16 +40,21 @@ class LoginViewController: UIViewController {
             .bind(to: viewModel.password)
             .disposed(by: disposeBag)
         
-        viewModel.AllCredentialsAreValid.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
+        nameTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.name)
+            .disposed(by: disposeBag)
+        
+        viewModel.AllCredentialsAreValid.bind(to: createAccountButton.rx.isEnabled).disposed(by: disposeBag)
     }
     
-    func setupSignInButton(){
+    func setupCreateAccountButton(){
         viewModel.AllCredentialsAreValid.subscribe(onNext: { [unowned self] (credentialsAreValid) in
-            self.signInButton.isEnabled = credentialsAreValid
+            self.createAccountButton.isEnabled = credentialsAreValid
         }).disposed(by: disposeBag)
         
-        signInButton.rx.tap.bind{ [unowned self] in
-            self.viewModel.signIn(completion: { [unowned self] (user, error) in
+        createAccountButton.rx.tap.bind{ [unowned self] in
+            self.viewModel.createUser(completion: { [unowned self] (user, error) in
                 if let user = user{
                     self.showHomeScreen()
                 }
@@ -60,12 +62,7 @@ class LoginViewController: UIViewController {
                     self.showErrorFeedback(error)
                 }
             })
-        }.disposed(by: disposeBag)
-    }
-    
-    func showErrorFeedback(_ error: Error){
-        let errorDescription = viewModel.getErrorDescription(error)
-        print(errorDescription)
+            }.disposed(by: disposeBag)
     }
     
     func showHomeScreen(){
@@ -73,15 +70,9 @@ class LoginViewController: UIViewController {
         show(homeViewController, sender: nil)
     }
     
-    func setupRegisterButton(){
-        registerButton.rx.tap.bind{ [unowned self] in
-            self.showRegisterScreen()
-        }.disposed(by: disposeBag)
-    }
-    
-    func showRegisterScreen(){
-        let registerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerViewController")
-        navigationController!.pushViewController(registerViewController, animated: true)
+    func showErrorFeedback(_ error: Error){
+        let errorDescription = viewModel.getErrorDescription(error)
+        print(errorDescription)
     }
     
     func setupEmailFieldField(){
@@ -112,7 +103,7 @@ class LoginViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 guard let password = self.passwordTextField.text else { return }
                 if self.viewModel.isValidPassword(password: password){
-                     self.dismissPasswordValidationInformation()
+                    self.dismissPasswordValidationInformation()
                 }else{
                     self.showPasswordValidationInformation()
                 }
@@ -126,6 +117,19 @@ class LoginViewController: UIViewController {
         print("vc escreveu a senha correto")
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

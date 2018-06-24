@@ -1,4 +1,12 @@
 //
+//  RegisterViewModel.swift
+//  Your Key Manager
+//
+//  Created by Danilo Henrique on 23/06/18.
+//  Copyright © 2018 Danilo Henrique. All rights reserved.
+//
+
+//
 //  LoginViewModel.swift
 //  Your Key Manager
 //
@@ -10,17 +18,18 @@ import Foundation
 import RxSwift
 import Moya
 
-class LoginViewModel {
+class RegisterViewModel {
     
     let apiManager = DevPeopleAPIManager()
     
     var email = Variable<String>("")
     var password = Variable<String>("")
+    var name = Variable<String>("")
     
     var AllCredentialsAreValid: Observable<Bool> {
-        return Observable.combineLatest(email.asObservable(), password.asObservable()){
-            [unowned self] email, password in
-            return self.isValidEmail(email: email) && self.isValidPassword(password: password)
+        return Observable.combineLatest(email.asObservable(), password.asObservable(), name.asObservable()){
+            [unowned self] email, password, name in
+            return self.isValidEmail(email: email) && self.isValidPassword(password: password) && self.nameIsntEmpty(name: name)
         }
     }
     
@@ -34,9 +43,13 @@ class LoginViewModel {
         return emailPredicate.evaluate(with: email)
     }
     
-    func signIn(completion: @escaping (User?, Error?) -> Void){
-        apiManager.signIn(email: email.value, password: password.value) { (user, error) in
-            completion(user,error)
+    func nameIsntEmpty(name: String) -> Bool{
+        return not(name.isEmpty)
+    }
+    
+    func createUser(completion: @escaping (User?, Error?) -> Void){
+        apiManager.createUser(email: email.value, password: password.value, name: name.value) { (user, error) in
+            completion(user, error)
         }
     }
     
@@ -60,6 +73,7 @@ class LoginViewModel {
         }
     }
 }
+
 
 
 
