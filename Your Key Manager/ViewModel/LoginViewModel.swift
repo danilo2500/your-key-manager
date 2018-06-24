@@ -36,7 +36,10 @@ class LoginViewModel {
     }
     
     func signIn(completion: @escaping (User?, Error?) -> Void){
-        apiManager.signIn(email: email.value, password: password.value) { (user, error) in
+        apiManager.signIn(email: email.value, password: password.value) { [unowned self] (user, error) in
+            if user != nil {
+                KeychainManager.shared.saveLoginCredentials(email: self.email.value, password: self.password.value)
+            }
             completion(user,error)
         }
     }

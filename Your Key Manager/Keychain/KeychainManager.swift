@@ -41,15 +41,39 @@ class KeychainManager {
         }
     }
     
+    func getPasswordStoredOnKeychain() -> String? {
+        
+        guard let email = getStoredEmail() else {
+            fatalError("No email stored")
+        }
+        
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: email,
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            let keychainPassword = try passwordItem.readPassword()
+            return keychainPassword
+        } catch {
+            fatalError("Error reading password from keychain - \(error)")
+        }
+    }
+    
     func getStoredEmail() -> String? {
         let email = UserDefaults.standard.value(forKey: "email") as? String
         return email
+    }
+    
+    func hasLoginKeyStored() -> Bool {
+        let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
+        return hasLoginKey
     }
     
     private func doesntHasLoginKeyStored() -> Bool {
         let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
         return not(hasLoginKey)
     }
+    
+    
     
     private func storeEmailOnUserDefaults(_ email: String){
         UserDefaults.standard.setValue(email, forKey: "email")

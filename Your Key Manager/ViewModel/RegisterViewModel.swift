@@ -43,17 +43,20 @@ class RegisterViewModel {
         return emailPredicate.evaluate(with: email)
     }
     
-    func nameIsntEmpty(name: String) -> Bool{
+    func nameIsntEmpty(name: String) -> Bool {
         return not(name.isEmpty)
     }
     
-    func createUser(completion: @escaping (User?, Error?) -> Void){
-        apiManager.createUser(email: email.value, password: password.value, name: name.value) { (user, error) in
+    func createUser(completion: @escaping (User?, Error?) -> Void) {
+        apiManager.createUser(email: email.value, password: password.value, name: name.value) { [unowned self] (user, error) in
+            if user != nil {
+                KeychainManager.shared.saveLoginCredentials(email: self.email.value, password: self.password.value)
+            }
             completion(user, error)
         }
     }
     
-    func getErrorDescription(_ error: Error) -> String{
+    func getErrorDescription(_ error: Error) -> String {
         let moyaError = error as? MoyaError
         let response = moyaError?.response
         let statusCode = response?.statusCode ?? 0

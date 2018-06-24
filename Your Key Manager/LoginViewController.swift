@@ -35,6 +35,12 @@ class LoginViewController: UIViewController {
         setupPasswordTextField()
         setupBiometricBarItem()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBiometricBarItem()
+    }
 
     func setupReactiveBinds() {
         emailTextField.rx.text
@@ -142,34 +148,46 @@ class LoginViewController: UIViewController {
     }
     
     func setupBiometricBarItem() {
+    
+        if KeychainManager.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDsupported(){
+            biometryBarItem.isEnabled = true
+        }else{
+            biometryBarItem.isEnabled = false
+        }
+        
         biometryBarItem.rx.tap.bind{ [unowned self] in
             self.displayBiometryAuth()
         }.disposed(by: disposeBag)
     }
     
     func displayBiometryAuth() {
-//        biometricAuth.authenticateWithBiometrics(localizedReason: "ENFIA O DEDO", successBlock: { [unowned self] in
-//            self.validateUserBiometry()
-//        }, failureBlock: { (error) in
-//            self.showErrorValidatingBiometry()
-//        })
-    }
-    
-    func validateUserBiometry() {
-        
-        viewModel.signIn { (user, error) in
-            
+        BiometricIDAuth.shared.authenticateUser { [unowned self] (sucess, error) in
+            if sucess {
+                self.loginAutomaticallyUsingEmailOnKeychain()
+            }
+            if let error = error {
+                print(BiometricIDAuth.shared.getTouchIDErrorMessage(error))
+            }
         }
     }
     
-    func loadEmailAndPassword() {
+    func loginAutomaticallyUsingEmailOnKeychain() {
+        guard let password = KeychainManager.shared.getPasswordStoredOnKeychain(), let email = KeychainManager.shared.getPasswordStoredOnKeychain() else {
+            fatalError("No password or email saved correctly")
+        }
+        emailTextField.text = email
+        passwordTextField.text = password
+        self.viewModel.signIn(completion: { [unowned self] (user, error) in
+            if let user = user{
+                self.showHomeScreen()
+            }
+            if let error = error{
+                self.showErrorFeedback(error)
+            }
+        })
         
     }
     
-    
-    func showErrorValidatingBiometry() {
-        
-    }
     
 }
 

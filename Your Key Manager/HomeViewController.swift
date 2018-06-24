@@ -16,18 +16,21 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //if biometricAuth.isTouchIdEnabledOnDevice() {
-            registerBiometricAuth()
-        //}
+
+        registerBiometricAuth()
         
     }
     
     func registerBiometricAuth(){
-//        biometricAuth.authenticateWithBiometrics(localizedReason: "ENFIA O DEDO", successBlock: { [unowned self] in
-//            self.validateUserBiometry()
-//        }, failureBlock: { (error) in
-//            self.showErrorValidatingBiometry()
-//        })
+        BiometricIDAuth.shared.authenticateUser { (sucess, error) in
+            if sucess{
+                print("TOUCH ID CADASTRADO")
+            }
+            if let error = error{
+                print(BiometricIDAuth.shared.getTouchIDErrorMessage(error))
+            }
+
+        }
     }
     
     func validateUserBiometry(){
