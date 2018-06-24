@@ -10,7 +10,6 @@ target 'Your Key Manager' do
   pod ‘Moya/RxSwift’
   pod ‘RxCocoa’
   pod ‘Moya’
-  pod 'BiometricAuthenticator'
 
   target 'Your Key ManagerTests' do
     inherit! :search_paths

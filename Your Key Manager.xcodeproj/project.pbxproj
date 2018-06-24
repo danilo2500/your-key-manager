@@ -12,6 +12,10 @@
 		5585501A20DF1B3E00FE3767 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */; };
 		5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501B20DF245C00FE3767 /* Connectivity.swift */; };
 		5585501E20DF332E00FE3767 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501D20DF332E00FE3767 /* HomeViewController.swift */; };
+		5585502020E003FE00FE3767 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501F20E003FE00FE3767 /* KeychainPasswordItem.swift */; };
+		5585502320E004E700FE3767 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585502220E004E700FE3767 /* KeychainConfiguration.swift */; };
+		5585502920E00CBD00FE3767 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585502820E00CBD00FE3767 /* KeychainManager.swift */; };
+		5585502C20E0190000FE3767 /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585502B20E0190000FE3767 /* TouchIDAuthentication.swift */; };
 		55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9820DDB592004B960D /* AppDelegate.swift */; };
 		55F96D9B20DDB592004B960D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9A20DDB592004B960D /* LoginViewController.swift */; };
 		55F96D9E20DDB592004B960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F96D9C20DDB592004B960D /* Main.storyboard */; };
@@ -55,6 +59,10 @@
 		5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		5585501B20DF245C00FE3767 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		5585501D20DF332E00FE3767 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5585501F20E003FE00FE3767 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		5585502220E004E700FE3767 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		5585502820E00CBD00FE3767 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		5585502B20E0190000FE3767 /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		55F96D9520DDB592004B960D /* Your Key Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Key Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F96D9820DDB592004B960D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F96D9A20DDB592004B960D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +130,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5585502120E0048D00FE3767 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				5585501F20E003FE00FE3767 /* KeychainPasswordItem.swift */,
+				5585502220E004E700FE3767 /* KeychainConfiguration.swift */,
+				5585502820E00CBD00FE3767 /* KeychainManager.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		5585502A20E018DB00FE3767 /* TouchID */ = {
+			isa = PBXGroup;
+			children = (
+				5585502B20E0190000FE3767 /* TouchIDAuthentication.swift */,
+			);
+			path = TouchID;
+			sourceTree = "<group>";
+		};
 		55F96D8C20DDB592004B960D = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +179,8 @@
 				55F96DC920DDED35004B960D /* Networking */,
 				55F96DCE20DDF1C8004B960D /* Supporting Files */,
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
+				5585502120E0048D00FE3767 /* Keychain */,
+				5585502A20E018DB00FE3767 /* TouchID */,
 				55F96D9A20DDB592004B960D /* LoginViewController.swift */,
 				5585501720DF19F600FE3767 /* RegisterViewController.swift */,
 				5585501D20DF332E00FE3767 /* HomeViewController.swift */,
@@ -493,7 +521,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BiometricAuthenticator/BiometricAuthenticator.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -502,7 +529,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricAuthenticator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -544,12 +570,16 @@
 				5585501A20DF1B3E00FE3767 /* RegisterViewModel.swift in Sources */,
 				55F96DD020DDF212004B960D /* Constants.swift in Sources */,
 				55F96DD820DEDB90004B960D /* Util.swift in Sources */,
+				5585502C20E0190000FE3767 /* TouchIDAuthentication.swift in Sources */,
+				5585502920E00CBD00FE3767 /* KeychainManager.swift in Sources */,
 				55F96DD220DEBC4F004B960D /* User.swift in Sources */,
 				5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */,
 				55F96DCD20DDEE4C004B960D /* DevPeopleAPI.swift in Sources */,
 				55F96DD420DEC41B004B960D /* DevPeopleAPIManager.swift in Sources */,
 				55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */,
 				5585501E20DF332E00FE3767 /* HomeViewController.swift in Sources */,
+				5585502320E004E700FE3767 /* KeychainConfiguration.swift in Sources */,
+				5585502020E003FE00FE3767 /* KeychainPasswordItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,7 +749,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Your Key Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.danilo.Your-Key-Manager";
+				PRODUCT_BUNDLE_IDENTIFIER = "Your-Key-Manager.br.com.danilo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -734,7 +764,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Your Key Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.danilo.Your-Key-Manager";
+				PRODUCT_BUNDLE_IDENTIFIER = "Your-Key-Manager.br.com.danilo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
