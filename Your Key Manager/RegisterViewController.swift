@@ -54,7 +54,14 @@ class RegisterViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         createAccountButton.rx.tap.bind{ [unowned self] in
+            
+            if not(Connectivity.isConnectedToInternet()) {
+                self.showNoInternetConnectionError()
+                return
+            }
+            
             self.viewModel.createUser(completion: { [unowned self] (user, error) in
+                
                 if let user = user{
                     self.showHomeScreen()
                 }
@@ -63,6 +70,10 @@ class RegisterViewController: UIViewController {
                 }
             })
             }.disposed(by: disposeBag)
+    }
+    
+    func showNoInternetConnectionError() {
+        print("Vc esta sem internet")
     }
     
     func showHomeScreen(){

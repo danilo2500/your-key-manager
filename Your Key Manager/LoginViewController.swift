@@ -52,6 +52,12 @@ class LoginViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         signInButton.rx.tap.bind{ [unowned self] in
+            
+            if not(Connectivity.isConnectedToInternet()) {
+                self.showNoInternetConnectionError()
+                return
+            }
+            
             self.viewModel.signIn(completion: { [unowned self] (user, error) in
                 if let user = user{
                     self.showHomeScreen()
@@ -61,6 +67,10 @@ class LoginViewController: UIViewController {
                 }
             })
         }.disposed(by: disposeBag)
+    }
+    
+    func showNoInternetConnectionError() {
+        print("Vc esta sem internet")
     }
     
     func showErrorFeedback(_ error: Error){

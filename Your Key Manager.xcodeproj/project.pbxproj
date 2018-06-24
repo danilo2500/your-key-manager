@@ -10,6 +10,7 @@
 		3ED0D656B58010108620F3FB /* Pods_Your_Key_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B257D71AB51E97C6E4CD15 /* Pods_Your_Key_Manager.framework */; };
 		5585501820DF19F600FE3767 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501720DF19F600FE3767 /* RegisterViewController.swift */; };
 		5585501A20DF1B3E00FE3767 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */; };
+		5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501B20DF245C00FE3767 /* Connectivity.swift */; };
 		55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9820DDB592004B960D /* AppDelegate.swift */; };
 		55F96D9B20DDB592004B960D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9A20DDB592004B960D /* LoginViewController.swift */; };
 		55F96D9E20DDB592004B960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F96D9C20DDB592004B960D /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		1FACBEB5AA4B1CD95E65F04C /* Pods-Your Key Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key Manager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager.debug.xcconfig"; sourceTree = "<group>"; };
 		5585501720DF19F600FE3767 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		5585501B20DF245C00FE3767 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		55F96D9520DDB592004B960D /* Your Key Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Key Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F96D9820DDB592004B960D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F96D9A20DDB592004B960D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -195,8 +197,8 @@
 		55F96DC820DDB5BF004B960D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */,
 				55F96DD520DED4B5004B960D /* LoginViewModel.swift */,
+				5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -206,6 +208,7 @@
 			children = (
 				55F96DD320DEC41B004B960D /* DevPeopleAPIManager.swift */,
 				55F96DCC20DDEE4C004B960D /* DevPeopleAPI.swift */,
+				5585501B20DF245C00FE3767 /* Connectivity.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				55F96DD020DDF212004B960D /* Constants.swift in Sources */,
 				55F96DD820DEDB90004B960D /* Util.swift in Sources */,
 				55F96DD220DEBC4F004B960D /* User.swift in Sources */,
+				5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */,
 				55F96DCD20DDEE4C004B960D /* DevPeopleAPI.swift in Sources */,
 				55F96DD420DEC41B004B960D /* DevPeopleAPIManager.swift in Sources */,
 				55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */,
