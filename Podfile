@@ -10,6 +10,7 @@ target 'Your Key Manager' do
   pod ‘Moya/RxSwift’
   pod ‘RxCocoa’
   pod ‘Moya’
+  pod ‘Kingfisher’
 
   target 'Your Key ManagerTests' do
     inherit! :search_paths
