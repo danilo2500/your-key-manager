@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import BiometricAuthenticator
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +18,9 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    
+    @IBOutlet weak var biometryBarItem: UIBarButtonItem!
+    
     
     let viewModel = LoginViewModel()
     let disposeBag = DisposeBag()
@@ -29,10 +33,10 @@ class LoginViewController: UIViewController {
         setupRegisterButton()
         setupEmailFieldField()
         setupPasswordTextField()
-        
+        setupBiometricBarItem()
     }
 
-    func setupReactiveBinds(){
+    func setupReactiveBinds() {
         emailTextField.rx.text
             .orEmpty
             .bind(to: viewModel.email)
@@ -46,7 +50,7 @@ class LoginViewController: UIViewController {
         viewModel.AllCredentialsAreValid.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
     }
     
-    func setupSignInButton(){
+    func setupSignInButton() {
         viewModel.AllCredentialsAreValid.subscribe(onNext: { [unowned self] (credentialsAreValid) in
             self.signInButton.isEnabled = credentialsAreValid
         }).disposed(by: disposeBag)
@@ -73,29 +77,29 @@ class LoginViewController: UIViewController {
         print("Vc esta sem internet")
     }
     
-    func showErrorFeedback(_ error: Error){
+    func showErrorFeedback(_ error: Error) {
         let errorDescription = viewModel.getErrorDescription(error)
         print(errorDescription)
     }
     
-    func showHomeScreen(){
+    func showHomeScreen() {
         let homeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeNavigationController")
         
         show(homeViewController, sender: nil)
     }
     
-    func setupRegisterButton(){
+    func setupRegisterButton() {
         registerButton.rx.tap.bind{ [unowned self] in
             self.showRegisterScreen()
         }.disposed(by: disposeBag)
     }
     
-    func showRegisterScreen(){
+    func showRegisterScreen() {
         let registerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerViewController")
         navigationController!.pushViewController(registerViewController, animated: true)
     }
     
-    func setupEmailFieldField(){
+    func setupEmailFieldField() {
         emailTextField.rx.controlEvent(.editingDidEnd)
             .asObservable()
             .subscribe(onNext: { [unowned self] in
@@ -109,15 +113,15 @@ class LoginViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    func showEmailValidationInformation(){
+    func showEmailValidationInformation() {
         print("formato de email incorreto")
     }
     
-    func dismissEmailValidationInformation(){
+    func dismissEmailValidationInformation() {
         print("vc escreveu o email correto")
     }
     
-    func setupPasswordTextField(){
+    func setupPasswordTextField() {
         passwordTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
             .asObservable()
             .subscribe(onNext: { [unowned self] in
@@ -130,12 +134,43 @@ class LoginViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    func showPasswordValidationInformation(){
+    func showPasswordValidationInformation() {
         print("A senha deverá conter no mínimo 8 caracteres, dos quais deve possuir no mínimo 1 letra, 1 número e 1 caractere especial")
     }
-    func dismissPasswordValidationInformation(){
+    func dismissPasswordValidationInformation() {
         print("vc escreveu a senha correto")
     }
+    
+    func setupBiometricBarItem() {
+        biometryBarItem.rx.tap.bind{ [unowned self] in
+            self.displayBiometryAuth()
+        }.disposed(by: disposeBag)
+    }
+    
+    func displayBiometryAuth() {
+//        biometricAuth.authenticateWithBiometrics(localizedReason: "ENFIA O DEDO", successBlock: { [unowned self] in
+//            self.validateUserBiometry()
+//        }, failureBlock: { (error) in
+//            self.showErrorValidatingBiometry()
+//        })
+    }
+    
+    func validateUserBiometry() {
+        
+        viewModel.signIn { (user, error) in
+            
+        }
+    }
+    
+    func loadEmailAndPassword() {
+        
+    }
+    
+    
+    func showErrorValidatingBiometry() {
+        
+    }
+    
 }
 
 

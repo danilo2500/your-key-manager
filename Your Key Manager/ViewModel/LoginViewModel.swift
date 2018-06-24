@@ -56,6 +56,7 @@ class LoginViewModel {
             return "Um erro inesperado aconteceu ao tentar se conectar com os servidores"
         }
     }
+    
 }
 
 

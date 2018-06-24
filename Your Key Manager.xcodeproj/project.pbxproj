@@ -11,6 +11,7 @@
 		5585501820DF19F600FE3767 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501720DF19F600FE3767 /* RegisterViewController.swift */; };
 		5585501A20DF1B3E00FE3767 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */; };
 		5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501B20DF245C00FE3767 /* Connectivity.swift */; };
+		5585501E20DF332E00FE3767 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585501D20DF332E00FE3767 /* HomeViewController.swift */; };
 		55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9820DDB592004B960D /* AppDelegate.swift */; };
 		55F96D9B20DDB592004B960D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9A20DDB592004B960D /* LoginViewController.swift */; };
 		55F96D9E20DDB592004B960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F96D9C20DDB592004B960D /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 		5585501720DF19F600FE3767 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5585501920DF1B3E00FE3767 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		5585501B20DF245C00FE3767 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		5585501D20DF332E00FE3767 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		55F96D9520DDB592004B960D /* Your Key Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Key Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F96D9820DDB592004B960D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F96D9A20DDB592004B960D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
 				55F96D9A20DDB592004B960D /* LoginViewController.swift */,
 				5585501720DF19F600FE3767 /* RegisterViewController.swift */,
+				5585501D20DF332E00FE3767 /* HomeViewController.swift */,
 				55F96D9C20DDB592004B960D /* Main.storyboard */,
 				55F96D9F20DDB592004B960D /* Assets.xcassets */,
 				55F96DA120DDB592004B960D /* LaunchScreen.storyboard */,
@@ -490,6 +493,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BiometricAuthenticator/BiometricAuthenticator.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -498,6 +502,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricAuthenticator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -544,6 +549,7 @@
 				55F96DCD20DDEE4C004B960D /* DevPeopleAPI.swift in Sources */,
 				55F96DD420DEC41B004B960D /* DevPeopleAPIManager.swift in Sources */,
 				55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */,
+				5585501E20DF332E00FE3767 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

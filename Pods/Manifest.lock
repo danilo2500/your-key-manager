@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.5.1)
+  - BiometricAuthenticator (1.0.3)
   - Moya (10.0.1):
     - Moya/Core (= 10.0.1)
   - Moya/Core (10.0.1):
@@ -14,6 +15,7 @@ PODS:
   - RxSwift (4.0.0)
 
 DEPENDENCIES:
+  - BiometricAuthenticator
   - Moya
   - Moya/RxSwift
   - RxCocoa
@@ -21,11 +23,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  BiometricAuthenticator: 23daaac4d111e1a6171aef418da3930839bb4b89
   Moya: 9e621707ff754eeb51ff3ec51a3d54e517c0733a
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 
-PODFILE CHECKSUM: d48e2aff790916f3b8d1540378b96e465a5b2a11
+PODFILE CHECKSUM: 9a97b8e48f5f2d8daa707284196c51bec09f0ff6
 
 COCOAPODS: 1.4.0
