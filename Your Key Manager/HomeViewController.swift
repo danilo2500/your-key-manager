@@ -10,13 +10,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    //let biometricAuth = BiometricAuthenticator()
+    let viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
         registerBiometricAuth()
+        
+        showUserCredentials()
         
     }
     
@@ -25,19 +27,13 @@ class HomeViewController: UIViewController {
             if sucess{
                 print("TOUCH ID CADASTRADO")
             }
-            if let error = error{
-                print(BiometricIDAuth.shared.getTouchIDErrorMessage(error))
-            }
-
         }
     }
     
-    func validateUserBiometry(){
-        
+    func showUserCredentials() {
+        let credentials = viewModel.getWebsiteCredentials()
+
     }
-    
-    func showErrorValidatingBiometry(){
-        print("erro ao adicinar biometria")
-    }
+
     
 }

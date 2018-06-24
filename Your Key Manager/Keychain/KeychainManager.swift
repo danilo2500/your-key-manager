@@ -25,23 +25,23 @@ class KeychainManager {
         
     }
     
-    func checkIfLoginIsCorrect(email: String, password: String) -> Bool {
-        guard email == UserDefaults.standard.value(forKey: "email") as? String else {
-            return false
-        }
-        
-        do {
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: email,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            let keychainPassword = try passwordItem.readPassword()
-            return password == keychainPassword
-        } catch {
-            fatalError("Error reading password from keychain - \(error)")
-        }
-    }
+//    func checkIfLoginIsCorrect(email: String, password: String) -> Bool {
+//        guard email == UserDefaults.standard.value(forKey: "email") as? String else {
+//            return false
+//        }
+//
+//        do {
+//            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+//                                                    account: email,
+//                                                    accessGroup: KeychainConfiguration.accessGroup)
+//            let keychainPassword = try passwordItem.readPassword()
+//            return password == keychainPassword
+//        } catch {
+//            fatalError("Error reading password from keychain - \(error)")
+//        }
+//    }
     
-    func getPasswordStoredOnKeychain() -> String? {
+    func getUserPasswordStoredOnKeychain() -> String? {
         
         guard let email = getStoredEmail() else {
             fatalError("No email stored")
@@ -73,7 +73,31 @@ class KeychainManager {
         return not(hasLoginKey)
     }
     
+    func storeWebsitePassword( websiteURL: String, password: String) {
+        
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: websiteURL,
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            
+            try passwordItem.savePassword(password)
+        } catch {
+            fatalError("Error updating keychain - \(error)")
+        }
+    }
     
+    func getWebsitePassword( websiteURL: String) -> String? {
+    
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: websiteURL,
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            let keychainPassword = try passwordItem.readPassword()
+            return keychainPassword
+        } catch {
+            fatalError("Error reading password from keychain - \(error)")
+        }
+    }
     
     private func storeEmailOnUserDefaults(_ email: String){
         UserDefaults.standard.setValue(email, forKey: "email")
