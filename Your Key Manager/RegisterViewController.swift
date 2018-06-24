@@ -77,7 +77,7 @@ class RegisterViewController: UIViewController {
     }
     
     func showHomeScreen(){
-        let homeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeViewController")
+        let homeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeNavigationController")
         show(homeViewController, sender: nil)
     }
     
