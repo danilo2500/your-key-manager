@@ -1,0 +1,159 @@
+//
+//  ViewController.swift
+//  Your Key Manager
+//
+//  Created by Danilo Henrique on 22/06/18.
+//  Copyright © 2018 Danilo Henrique. All rights reserved.
+//
+
+import UIKit
+import RxSwift
+import RxCocoa
+
+class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    let viewModel = LoginViewModel()
+    let disposeBag = DisposeBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupReactiveBinds()
+        setupSignInButton()
+        setupRegisterButton()
+        setupEmailFieldField()
+        setupPasswordTextField()
+        
+    }
+
+    func setupReactiveBinds(){
+        emailTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.email)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.password)
+            .disposed(by: disposeBag)
+        
+        viewModel.AllCredentialsAreValid.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
+    }
+    
+    func setupSignInButton(){
+        viewModel.AllCredentialsAreValid.subscribe(onNext: { [unowned self] (credentialsAreValid) in
+            self.signInButton.isEnabled = credentialsAreValid
+        }).disposed(by: disposeBag)
+        
+        signInButton.rx.tap.bind{ [unowned self] in
+            self.viewModel.signIn(completion: { [unowned self] (user, error) in
+                if let user = user{
+                    self.showHomeScreen()
+                }
+                if let error = error{
+                    self.showErrorFeedback(error: error)
+                }
+            })
+        }.disposed(by: disposeBag)
+    }
+    
+    func showErrorFeedback(error: Error){
+        let errorDescription = viewModel.getErrorDescription(error)
+        print(errorDescription)
+    }
+    
+    func showHomeScreen(){
+        let registerViewController = storyboard!.instantiateViewController(withIdentifier: "homeViewController")
+        navigationController!.pushViewController(registerViewController, animated: true)
+    }
+    
+    func setupRegisterButton(){
+        registerButton.rx.tap.bind{ [unowned self] in
+            self.showRegisterScreen()
+        }.disposed(by: disposeBag)
+    }
+    
+    func showRegisterScreen(){
+        let registerViewController = storyboard!.instantiateViewController(withIdentifier: "registerViewController")
+        navigationController!.pushViewController(registerViewController, animated: true)
+    }
+    
+    func setupEmailFieldField(){
+        emailTextField.rx.controlEvent(.editingDidEnd)
+            .asObservable()
+            .subscribe(onNext: { [unowned self] in
+                guard let email = self.emailTextField.text else { return }
+                if self.viewModel.isValidEmail(email: email){
+                    self.dismissEmailValidationInformation()
+                }else{
+                    self.showEmailValidationInformation()
+                }
+                
+            }).disposed(by: disposeBag)
+    }
+    
+    func showEmailValidationInformation(){
+        print("formato de email incorreto")
+    }
+    
+    func dismissEmailValidationInformation(){
+        print("vc escreveu o email correto")
+    }
+    
+    func setupPasswordTextField(){
+        passwordTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
+            .asObservable()
+            .subscribe(onNext: { [unowned self] in
+                guard let password = self.passwordTextField.text else { return }
+                if self.viewModel.isValidPassword(password: password){
+                     self.dismissPasswordValidationInformation()
+                }else{
+                    self.showPasswordValidationInformation()
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func showPasswordValidationInformation(){
+        print("A senha deverá conter no mínimo 8 caracteres, dos quais deve possuir no mínimo 1 letra, 1 número e 1 caractere especial")
+    }
+    func dismissPasswordValidationInformation(){
+        print("vc escreveu a senha correto")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
