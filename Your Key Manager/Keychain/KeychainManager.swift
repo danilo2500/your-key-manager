@@ -25,23 +25,7 @@ class KeychainManager {
         
     }
     
-//    func checkIfLoginIsCorrect(email: String, password: String) -> Bool {
-//        guard email == UserDefaults.standard.value(forKey: "email") as? String else {
-//            return false
-//        }
-//
-//        do {
-//            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-//                                                    account: email,
-//                                                    accessGroup: KeychainConfiguration.accessGroup)
-//            let keychainPassword = try passwordItem.readPassword()
-//            return password == keychainPassword
-//        } catch {
-//            fatalError("Error reading password from keychain - \(error)")
-//        }
-//    }
-    
-    func getUserPasswordStoredOnKeychain() -> String? {
+    func getUserPassword() -> String? {
         
         guard let email = getStoredEmail() else {
             fatalError("No email stored")

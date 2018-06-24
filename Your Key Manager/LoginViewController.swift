@@ -171,7 +171,7 @@ class LoginViewController: UIViewController {
     }
     
     func loginAutomaticallyUsingEmailOnKeychain() {
-        guard let password = KeychainManager.shared.getPasswordStoredOnKeychain(), let email = KeychainManager.shared.getPasswordStoredOnKeychain() else {
+        guard let password = KeychainManager.shared.getUserPassword(), let email = KeychainManager.shared.getStoredEmail() else {
             fatalError("No password or email saved correctly")
         }
         emailTextField.text = email
