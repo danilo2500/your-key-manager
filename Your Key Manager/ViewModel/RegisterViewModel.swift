@@ -34,7 +34,7 @@ class RegisterViewModel {
     }
     
     func isValidPassword(password:String) -> Bool {
-        let PasswordPredicate = NSPredicate(format:"SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")
+        let PasswordPredicate = NSPredicate(format:"SELF MATCHES %@", "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")
         return PasswordPredicate.evaluate(with: password)
     }
     
@@ -57,10 +57,6 @@ class RegisterViewModel {
         let moyaError = error as? MoyaError
         let response = moyaError?.response
         let statusCode = response?.statusCode ?? 0
-        return getStatusCodeErrorMessage(statusCode)
-    }
-    
-    private func getStatusCodeErrorMessage(_ statusCode: Int) -> String{
         switch statusCode {
         case 401:
             return "Usuário não autorizado"
@@ -68,6 +64,8 @@ class RegisterViewModel {
             return "Usuário ou senha incorreta"
         case 408:
             return "Tempo de solicitação esgotado"
+        case 409:
+            return "Este e-mail já possui um cadastro"
         default:
             return "Um erro inesperado aconteceu ao tentar se conectar com os servidores"
         }
