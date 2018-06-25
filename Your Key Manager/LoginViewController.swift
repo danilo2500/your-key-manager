@@ -89,7 +89,6 @@ class LoginViewController: UIViewController {
     
     func showHomeScreen() {
         let homeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeNavigationController")
-        
         show(homeViewController, sender: nil)
     }
     
@@ -148,7 +147,7 @@ class LoginViewController: UIViewController {
     
     func setupBiometricBarItem() {
     
-        if KeychainManager.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDsupported(){
+        if KeychainManager.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDSupported(){
             biometryBarItem.isEnabled = true
         }else{
             biometryBarItem.isEnabled = false

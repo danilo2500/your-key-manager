@@ -7,22 +7,34 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewController {
-
+    
+    @IBOutlet weak var logOutBarButton: UIBarButtonItem!
+    
     let viewModel = HomeViewModel()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
-        registerBiometricAuth()
+        if viewModel.needsToAuthenticateTouchID(){
+            registerBiometricAuth()
+        }
         
-        showUserCredentials()
-        
+        setupReactiveBinds()
     }
     
+    func setupReactiveBinds() {
+        logOutBarButton.rx.tap.bind { [unowned self] in
+            let loginNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginNavigationController")
+            self.show(loginNavigationController, sender: nil)
+        }.disposed(by: disposeBag)
+    }
+ 
     func registerBiometricAuth(){
+        
         BiometricIDAuth.shared.authenticateUser { (sucess, error) in
             if sucess{
                 print("TOUCH ID CADASTRADO")
@@ -32,7 +44,6 @@ class HomeViewController: UIViewController {
     
     func showUserCredentials() {
         let credentials = viewModel.getWebsiteCredentials()
-
     }
 
     

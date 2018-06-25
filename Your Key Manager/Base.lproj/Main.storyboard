@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SMw-U8-357">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lbf-rz-mzd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,14 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="teste@hotmail.com" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7QR-YU-co5">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7QR-YU-co5">
                                 <rect key="frame" x="77" y="103" width="220" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345678910aA@" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kow-OI-Jrg">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kow-OI-Jrg">
                                 <rect key="frame" x="77" y="167" width="220" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -47,7 +47,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="xEb-2A-3c1">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="fingerPrintIcon" id="Rcg-jx-rgM"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Touch-icon-lg" id="Rcg-jx-rgM"/>
                     </navigationItem>
                     <connections>
                         <outlet property="biometryBarItem" destination="Rcg-jx-rgM" id="Zky-Y8-OIM"/>
@@ -159,6 +159,9 @@
                         <barButtonItem key="leftBarButtonItem" title="Sair" id="dka-H5-WYj"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sEs-XT-Ggn"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="logOutBarButton" destination="dka-H5-WYj" id="QGN-nF-8A5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05N-VD-wlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,7 +280,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hYN-50-aiy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lbf-rz-mzd" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="loginNavigationController" storyboardIdentifier="loginNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Lbf-rz-mzd" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bv9-1d-HUS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -312,7 +315,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Touch-icon-lg" width="138" height="137"/>
         <image name="facebookLogo" width="1500" height="1500"/>
-        <image name="fingerPrintIcon" width="512" height="512"/>
     </resources>
 </document>

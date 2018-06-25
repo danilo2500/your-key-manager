@@ -13,6 +13,12 @@ import Moya
 
 class HomeViewModel {
     
+    func needsToAuthenticateTouchID() -> Bool {
+        let userIsAutenticated = BiometricIDAuth.shared.userAlreadyAuthenticated()
+        let haveTouchIDSupport = BiometricIDAuth.shared.isBiometricIDSupported()
+        return not(userIsAutenticated) && haveTouchIDSupport
+    }
+    
     func getWebsiteCredentials() {
         
     }
