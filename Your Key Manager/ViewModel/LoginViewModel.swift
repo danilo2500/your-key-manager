@@ -22,22 +22,12 @@ class LoginViewModel {
     
     var canLoginIn: Observable<Bool> {
         return Observable.combineLatest(email.asObservable(), password.asObservable(), isLoginIn.asObservable()){
-            [unowned self] email, password, isLoginIn  in
-            return self.isValidEmail(email: email) && self.isValidPassword(password: password) && not(isLoginIn)
+            email, password, isLoginIn  in
+            return Util.isValid(email: email) && Util.isValid(password: password) && not(isLoginIn)
         }
         
     }
-    
-    func isValidPassword(password:String) -> Bool {
-        let PasswordPredicate = NSPredicate(format:"SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~])[A-Za-z\\dd!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,}")
-        return PasswordPredicate.evaluate(with: password)
-    }
-    
-    func isValidEmail(email:String) -> Bool {
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")
-        return emailPredicate.evaluate(with: email)
-    }
-    
+
     func signIn(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
         
         isLoginIn.value = true

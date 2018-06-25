@@ -18,29 +18,27 @@ class RegisterViewModel {
     var password = Variable<String>("")
     var name = Variable<String>("")
     
-    var AllCredentialsAreValid: Observable<Bool> {
-        return Observable.combineLatest(email.asObservable(), password.asObservable(), name.asObservable()){
-            [unowned self] email, password, name in
-            return self.isValidEmail(email: email) && self.isValidPassword(password: password) && self.nameIsntEmpty(name: name)
+    var isCreatingUser = Variable<Bool>(false)
+    
+    var canCreateUser: Observable<Bool> {
+        return Observable.combineLatest(email.asObservable(), password.asObservable(), name.asObservable(), isCreatingUser.asObservable()){
+            [unowned self] email, password, name, isCreatingUser in
+            return Util.isValid(email: email) && Util.isValid(password: password) && self.nameIsntEmpty(name) && not(isCreatingUser)
         }
     }
     
-    func isValidPassword(password:String) -> Bool {
-        let PasswordPredicate = NSPredicate(format:"SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~])[A-Za-z\\dd!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,}")
-        return PasswordPredicate.evaluate(with: password)
-    }
-    
-    func isValidEmail(email:String) -> Bool {
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")
-        return emailPredicate.evaluate(with: email)
-    }
-    
-    func nameIsntEmpty(name: String) -> Bool {
+    func nameIsntEmpty(_ name: String) -> Bool {
         return not(name.isEmpty)
     }
     
     func createUser(email: String, password: String, name: String,  completion: @escaping (User?, Error?) -> Void) {
+        
+        isCreatingUser.value = true
+        
         apiManager.createUser(email: email, password: password, name: name) { [unowned self] (user, error) in
+            
+            self.isCreatingUser.value = false
+            
             if user != nil {
                 KeychainManager.shared.saveLoginCredentials(email: email, password: password)
             }

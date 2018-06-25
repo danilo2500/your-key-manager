@@ -14,15 +14,15 @@ class BiometricIDAuth{
     private init(){}
     
     private let context = LAContext()
-    private var loginReason = "Logging in with Touch ID"
+    
     
     func isBiometricIDSupported() -> Bool{
         return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
     
-    func authenticateUser(completion: @escaping (Bool, Error?) -> Void) {
+    func authenticateUser(touchIDReason: String, completion: @escaping (Bool, Error?) -> Void) {
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
-                               localizedReason: loginReason) { [unowned self] (success, error) in
+                               localizedReason: touchIDReason) { [unowned self] (success, error) in
                                 self.registerUserAuthentication()
                                 completion(success, error)
         }

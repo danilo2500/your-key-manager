@@ -45,11 +45,11 @@ class RegisterViewController: UIViewController {
             .bind(to: viewModel.name)
             .disposed(by: disposeBag)
         
-        viewModel.AllCredentialsAreValid.bind(to: createAccountButton.rx.isEnabled).disposed(by: disposeBag)
+        viewModel.canCreateUser.bind(to: createAccountButton.rx.isEnabled).disposed(by: disposeBag)
     }
     
     func setupCreateAccountButton(){
-        viewModel.AllCredentialsAreValid.subscribe(onNext: { [unowned self] (credentialsAreValid) in
+        viewModel.canCreateUser.subscribe(onNext: { [unowned self] (credentialsAreValid) in
             self.createAccountButton.isEnabled = credentialsAreValid
         }).disposed(by: disposeBag)
         
@@ -94,7 +94,7 @@ class RegisterViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let email = self.emailTextField.text else { return }
-                if self.viewModel.isValidEmail(email: email){
+                if Util.isValid(email: email){
                     self.dismissEmailValidationInformation()
                 }else{
                     self.showEmailValidationInformation()
@@ -116,7 +116,7 @@ class RegisterViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let password = self.passwordTextField.text else { return }
-                if self.viewModel.isValidPassword(password: password){
+                if Util.isValid(password: password){
                     self.dismissPasswordValidationInformation()
                 }else{
                     self.showPasswordValidationInformation()

@@ -15,14 +15,9 @@ class KeychainManager {
     
     func saveLoginCredentials(email: String, password: String){
         
-        
-        storeEmailOnUserDefaults(email)
-        
-        
-        storePasswordOnKeychain(email: email, password: password)
-        
+        store(email: email)
+        storePassword(email: email, password: password)
         saveTagIndicatingLoginIsStored()
-        
     }
     
     func getUserPassword() -> String? {
@@ -83,11 +78,11 @@ class KeychainManager {
         }
     }
     
-    private func storeEmailOnUserDefaults(_ email: String){
+    private func store(email: String){
         UserDefaults.standard.setValue(email, forKey: "email")
     }
     
-    private func storePasswordOnKeychain(email: String, password: String) {
+    private func storePassword(email: String, password: String) {
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: email,

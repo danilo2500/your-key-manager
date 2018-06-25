@@ -12,18 +12,6 @@ let not = (!)
 
 class Util {
     static func isValid(password: String) -> Bool {
-      
-        let oneUperrcaseLetter = "(?=.*[a-z])"
-        let oneLowercaseLetter = "(?=.*[A-Z])"
-        let oneNumber = "(?=.*?[0-9])"
-        //let oneSpecialCharacter = "(?i)^([[a-z][^a-z0-9\\s\\(\\)\\[\\]\\{\\}\\\\^\\$\\|\\?\\*\\+\\.\\<\\>\\-\\=\\!\\_]]*)"
-        //let oneSpecialCharacter = "[.*[^A-Za-z0-9].*]"
-        let oneSpecialCharacter = "(?=.*[!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\])"
-        let EightCharacters = "{8,}"
-    
-        
-        //let regex = "^" + oneLowercaseLetter + oneUperrcaseLetter + oneNumber + oneSpecialCharacter + EightCharacters
-        //let passwordPredicate = NSPredicate(format:"SELF MATCHES %@", regex)
         
         let passwordPredicate = NSPredicate(format:"SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~])[A-Za-z\\dd!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,}")
         

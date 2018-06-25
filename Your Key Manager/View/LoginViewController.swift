@@ -116,7 +116,7 @@ class LoginViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let email = self.emailTextField.text else { return }
-                if self.viewModel.isValidEmail(email: email){
+                if Util.isValid(email: email){
                     self.dismissEmailValidationInformation()
                 }else{
                     self.showEmailValidationInformation()
@@ -138,7 +138,7 @@ class LoginViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let password = self.passwordTextField.text else { return }
-                if self.viewModel.isValidPassword(password: password){
+                if Util.isValid(password: password){
                     self.dismissPasswordValidationInformation()
                 }else{
                     self.showPasswordValidationInformation()
@@ -168,7 +168,7 @@ class LoginViewController: UIViewController {
     }
     
     func displayBiometryAuth() {
-        BiometricIDAuth.shared.authenticateUser { [unowned self] (sucess, error) in
+        BiometricIDAuth.shared.authenticateUser(touchIDReason: "Utilize sua biometria para realizar seu login"){ [unowned self] (sucess, error) in
             if sucess {
                 self.loginAutomaticallyUsingEmailOnKeychain()
             }
@@ -179,16 +179,22 @@ class LoginViewController: UIViewController {
     }
     
     func loginAutomaticallyUsingEmailOnKeychain() {
+        
+        if not(Connectivity.isConnectedToInternet()) {
+            self.showNoInternetConnectionError()
+            return
+        }
+        
         guard let password = KeychainManager.shared.getUserPassword(), let email = KeychainManager.shared.getStoredEmail() else {
             fatalError("No password or email saved correctly")
         }
+        
         DispatchQueue.main.async {
             self.emailTextField.text = email
             self.passwordTextField.text = password
             self.emailTextField.sendActions(for: .valueChanged)
             self.passwordTextField.sendActions(for: .valueChanged)
         }
-        
         
         self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, error) in
             if user != nil{
@@ -200,8 +206,7 @@ class LoginViewController: UIViewController {
         })
         
     }
-    
-    
+
 }
 
 
