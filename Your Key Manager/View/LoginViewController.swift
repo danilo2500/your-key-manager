@@ -36,7 +36,6 @@ class LoginViewController: UIViewController {
     
     func setupReactiveBinds() {
         
-        
         emailTextField.rx.text
             .orEmpty
             .bind(to: viewModel.email)

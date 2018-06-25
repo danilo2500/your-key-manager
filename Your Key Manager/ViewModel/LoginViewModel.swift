@@ -42,6 +42,7 @@ class LoginViewModel {
             
             completion(user,errorDescription)
         }
+        
     }
     
     func getEmailUsedOnLastLogin() -> String? {
