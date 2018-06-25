@@ -23,8 +23,8 @@ class BiometricIDAuth{
     func authenticateUser(completion: @escaping (Bool, Error?) -> Void) {
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                localizedReason: loginReason) { [unowned self] (success, error) in
-            self.registerUserAuthentication()
-            completion(success, error)
+                                self.registerUserAuthentication()
+                                completion(success, error)
         }
     }
     
@@ -33,7 +33,7 @@ class BiometricIDAuth{
         
         let message: String
         switch error {
-
+            
         case LAError.authenticationFailed:
             message = "Aconteceu um problema verificando sua identidade"
         case LAError.userCancel:
@@ -51,9 +51,9 @@ class BiometricIDAuth{
         }
         return message
     }
-
+    
     func registerUserAuthentication() {
-         UserDefaults.standard.setValue(true, forKey: "TouchIDIsAuthenticated")
+        UserDefaults.standard.setValue(true, forKey: "TouchIDIsAuthenticated")
     }
     
     func userAlreadyAuthenticated() -> Bool{

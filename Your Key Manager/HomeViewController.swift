@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if viewModel.needsToAuthenticateTouchID(){
             registerBiometricAuth()
         }
@@ -30,14 +30,17 @@ class HomeViewController: UIViewController {
         logOutBarButton.rx.tap.bind { [unowned self] in
             let loginNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginNavigationController")
             self.show(loginNavigationController, sender: nil)
-        }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
     }
- 
+    
     func registerBiometricAuth(){
         
         BiometricIDAuth.shared.authenticateUser { (sucess, error) in
             if sucess{
-                print("TOUCH ID CADASTRADO")
+                print("TOUCH ID CADASTRADO, Agora vc pode logar usando o touch ID")
+            }
+            if let error = error {
+                
             }
         }
     }
@@ -45,6 +48,7 @@ class HomeViewController: UIViewController {
     func showUserCredentials() {
         let credentials = viewModel.getWebsiteCredentials()
     }
-
+    
     
 }
+

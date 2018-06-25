@@ -39,10 +39,10 @@ class RegisterViewModel {
         return not(name.isEmpty)
     }
     
-    func createUser(completion: @escaping (User?, Error?) -> Void) {
-        apiManager.createUser(email: email.value, password: password.value, name: name.value) { [unowned self] (user, error) in
+    func createUser(email: String, password: String, name: String,  completion: @escaping (User?, Error?) -> Void) {
+        apiManager.createUser(email: email, password: password, name: name) { [unowned self] (user, error) in
             if user != nil {
-                KeychainManager.shared.saveLoginCredentials(email: self.email.value, password: self.password.value)
+                KeychainManager.shared.saveLoginCredentials(email: email, password: password)
             }
             completion(user, error)
         }

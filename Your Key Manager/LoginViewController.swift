@@ -20,7 +20,6 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var biometryBarItem: UIBarButtonItem!
     
-    
     let viewModel = LoginViewModel()
     let disposeBag = DisposeBag()
     
@@ -35,13 +34,9 @@ class LoginViewController: UIViewController {
         setupBiometricBarItem()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setupBiometricBarItem()
-    }
-
     func setupReactiveBinds() {
+        
+        
         emailTextField.rx.text
             .orEmpty
             .bind(to: viewModel.email)
@@ -52,12 +47,16 @@ class LoginViewController: UIViewController {
             .bind(to: viewModel.password)
             .disposed(by: disposeBag)
         
-        viewModel.AllCredentialsAreValid.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
+        viewModel.canLoginIn.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
+        
+        
     }
     
     func setupSignInButton() {
-        viewModel.AllCredentialsAreValid.subscribe(onNext: { [unowned self] (credentialsAreValid) in
-            self.signInButton.isEnabled = credentialsAreValid
+        viewModel.canLoginIn.subscribe(onNext: { [unowned self] (credentialsAreValid) in
+            DispatchQueue.main.async {
+                self.signInButton.isEnabled = credentialsAreValid
+            }
         }).disposed(by: disposeBag)
         
         signInButton.rx.tap.bind{ [unowned self] in
@@ -67,15 +66,18 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            self.viewModel.signIn(completion: { [unowned self] (user, error) in
-                if let user = user{
+            let email = self.emailTextField.text!
+            let password = self.passwordTextField.text!
+            
+            self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, error) in
+                if user != nil{
                     self.showHomeScreen()
                 }
                 if let error = error{
                     self.showErrorFeedback(error)
                 }
             })
-        }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
     }
     
     func showNoInternetConnectionError() {
@@ -95,7 +97,7 @@ class LoginViewController: UIViewController {
     func setupRegisterButton() {
         registerButton.rx.tap.bind{ [unowned self] in
             self.showRegisterScreen()
-        }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
     }
     
     func showRegisterScreen() {
@@ -104,6 +106,12 @@ class LoginViewController: UIViewController {
     }
     
     func setupEmailFieldField() {
+        
+        if let email = viewModel.getEmailUsedOnLastLogin() {
+            emailTextField.text = email
+            emailTextField.sendActions(for: .valueChanged)
+        }
+        
         emailTextField.rx.controlEvent(.editingDidEnd)
             .asObservable()
             .subscribe(onNext: { [unowned self] in
@@ -131,7 +139,7 @@ class LoginViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 guard let password = self.passwordTextField.text else { return }
                 if self.viewModel.isValidPassword(password: password){
-                     self.dismissPasswordValidationInformation()
+                    self.dismissPasswordValidationInformation()
                 }else{
                     self.showPasswordValidationInformation()
                 }
@@ -146,16 +154,17 @@ class LoginViewController: UIViewController {
     }
     
     func setupBiometricBarItem() {
-    
+        
         if KeychainManager.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDSupported(){
             biometryBarItem.isEnabled = true
         }else{
             biometryBarItem.isEnabled = false
         }
         
-        biometryBarItem.rx.tap.bind{ [unowned self] in
+        biometryBarItem.rx.tap.subscribe(onNext: { [unowned self] event in
+            
             self.displayBiometryAuth()
-        }.disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func displayBiometryAuth() {
@@ -173,10 +182,16 @@ class LoginViewController: UIViewController {
         guard let password = KeychainManager.shared.getUserPassword(), let email = KeychainManager.shared.getStoredEmail() else {
             fatalError("No password or email saved correctly")
         }
-        emailTextField.text = email
-        passwordTextField.text = password
-        self.viewModel.signIn(completion: { [unowned self] (user, error) in
-            if let user = user{
+        DispatchQueue.main.async {
+            self.emailTextField.text = email
+            self.passwordTextField.text = password
+            self.emailTextField.sendActions(for: .valueChanged)
+            self.passwordTextField.sendActions(for: .valueChanged)
+        }
+        
+        
+        self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, error) in
+            if user != nil{
                 self.showHomeScreen()
             }
             if let error = error{

@@ -15,9 +15,9 @@ class KeychainManager {
     
     func saveLoginCredentials(email: String, password: String){
         
-        if doesntHasLoginKeyStored() {
-            storeEmailOnUserDefaults(email)
-        }
+        
+        storeEmailOnUserDefaults(email)
+        
         
         storePasswordOnKeychain(email: email, password: password)
         
@@ -71,7 +71,7 @@ class KeychainManager {
     }
     
     func getWebsitePassword( websiteURL: String) -> String? {
-    
+        
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: websiteURL,
@@ -104,3 +104,4 @@ class KeychainManager {
     }
     
 }
+

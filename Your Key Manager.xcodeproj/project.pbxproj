@@ -18,6 +18,8 @@
 		5585502C20E0190000FE3767 /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585502B20E0190000FE3767 /* TouchIDAuthentication.swift */; };
 		5585502E20E0462600FE3767 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585502D20E0462600FE3767 /* HomeViewModel.swift */; };
 		5585503120E04A6100FE3767 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585503020E04A6100FE3767 /* RealmManager.swift */; };
+		5585503320E07D2B00FE3767 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585503220E07D2B00FE3767 /* Person.swift */; };
+		5585503520E07D8600FE3767 /* WebsiteCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585503420E07D8600FE3767 /* WebsiteCredential.swift */; };
 		55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9820DDB592004B960D /* AppDelegate.swift */; };
 		55F96D9B20DDB592004B960D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9A20DDB592004B960D /* LoginViewController.swift */; };
 		55F96D9E20DDB592004B960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F96D9C20DDB592004B960D /* Main.storyboard */; };
@@ -67,6 +69,8 @@
 		5585502B20E0190000FE3767 /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		5585502D20E0462600FE3767 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5585503020E04A6100FE3767 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		5585503220E07D2B00FE3767 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		5585503420E07D8600FE3767 /* WebsiteCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteCredential.swift; sourceTree = "<group>"; };
 		55F96D9520DDB592004B960D /* Your Key Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Key Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F96D9820DDB592004B960D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F96D9A20DDB592004B960D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -152,14 +156,6 @@
 			path = TouchID;
 			sourceTree = "<group>";
 		};
-		5585502F20E04A5200FE3767 /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				5585503020E04A6100FE3767 /* RealmManager.swift */,
-			);
-			path = Realm;
-			sourceTree = "<group>";
-		};
 		55F96D8C20DDB592004B960D = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +189,7 @@
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
 				5585502120E0048D00FE3767 /* Keychain */,
 				5585502A20E018DB00FE3767 /* TouchID */,
-				5585502F20E04A5200FE3767 /* Realm */,
+				5585503020E04A6100FE3767 /* RealmManager.swift */,
 				55F96D9A20DDB592004B960D /* LoginViewController.swift */,
 				5585501720DF19F600FE3767 /* RegisterViewController.swift */,
 				5585501D20DF332E00FE3767 /* HomeViewController.swift */,
@@ -227,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				55F96DD120DEBC4F004B960D /* User.swift */,
+				5585503220E07D2B00FE3767 /* Person.swift */,
+				5585503420E07D8600FE3767 /* WebsiteCredential.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -598,7 +596,9 @@
 				5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */,
 				55F96DCD20DDEE4C004B960D /* DevPeopleAPI.swift in Sources */,
 				55F96DD420DEC41B004B960D /* DevPeopleAPIManager.swift in Sources */,
+				5585503320E07D2B00FE3767 /* Person.swift in Sources */,
 				55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */,
+				5585503520E07D8600FE3767 /* WebsiteCredential.swift in Sources */,
 				5585501E20DF332E00FE3767 /* HomeViewController.swift in Sources */,
 				5585502320E004E700FE3767 /* KeychainConfiguration.swift in Sources */,
 				5585502020E003FE00FE3767 /* KeychainPasswordItem.swift in Sources */,

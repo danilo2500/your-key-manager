@@ -18,11 +18,14 @@ class LoginViewModel {
     var email = Variable<String>("")
     var password = Variable<String>("")
     
-    var AllCredentialsAreValid: Observable<Bool> {
-        return Observable.combineLatest(email.asObservable(), password.asObservable()){
-            [unowned self] email, password in
-            return self.isValidEmail(email: email) && self.isValidPassword(password: password)
+    var isLoginIn = Variable<Bool>(false)
+    
+    var canLoginIn: Observable<Bool> {
+        return Observable.combineLatest(email.asObservable(), password.asObservable(), isLoginIn.asObservable()){
+            [unowned self] email, password, isLoginIn  in
+            return self.isValidEmail(email: email) && self.isValidPassword(password: password) && not(isLoginIn)
         }
+        
     }
     
     func isValidPassword(password:String) -> Bool {
@@ -35,13 +38,24 @@ class LoginViewModel {
         return emailPredicate.evaluate(with: email)
     }
     
-    func signIn(completion: @escaping (User?, Error?) -> Void){
-        apiManager.signIn(email: email.value, password: password.value) { [unowned self] (user, error) in
+    func signIn(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
+        
+        isLoginIn.value = true
+        
+        apiManager.signIn(email: email, password: password) { [unowned self] (user, error) in
+            
+            self.isLoginIn.value = false
+            
             if user != nil {
-                KeychainManager.shared.saveLoginCredentials(email: self.email.value, password: self.password.value)
+                KeychainManager.shared.saveLoginCredentials(email: email, password: password)
             }
+            
             completion(user,error)
         }
+    }
+    
+    func getEmailUsedOnLastLogin() -> String? {
+        return KeychainManager.shared.getStoredEmail()
     }
     
     func getErrorDescription(_ error: Error) -> String{

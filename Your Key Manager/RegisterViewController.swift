@@ -1,6 +1,6 @@
 //
 //  RegisterViewController.swift
-//  
+//
 //
 //  Created by Danilo Henrique on 23/06/18.
 //
@@ -59,13 +59,16 @@ class RegisterViewController: UIViewController {
                 self.showNoInternetConnectionError()
                 return
             }
+            let email = self.emailTextField.text!
+            let password = self.passwordTextField.text!
+            let name = self.nameTextField.text!
             
-            self.viewModel.createUser(completion: { [unowned self] (user, error) in
+            self.viewModel.createUser(email: email, password: password, name: name, completion: { [unowned self] (user, error) in
                 
-                if let user = user{
+                if user != nil {
                     self.showHomeScreen()
                 }
-                if let error = error{
+                if let error = error {
                     self.showErrorFeedback(error)
                 }
             })
