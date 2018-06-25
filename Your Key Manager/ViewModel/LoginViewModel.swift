@@ -28,11 +28,11 @@ class LoginViewModel {
         
     }
 
-    func signIn(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (User?, String?) -> Void) {
         
         isLoginIn.value = true
         
-        apiManager.signIn(email: email, password: password) { [unowned self] (user, error) in
+        apiManager.signIn(email: email, password: password) { [unowned self] (user, errorDescription) in
             
             self.isLoginIn.value = false
             
@@ -40,28 +40,12 @@ class LoginViewModel {
                 KeychainManager.shared.saveLoginCredentials(email: email, password: password)
             }
             
-            completion(user,error)
+            completion(user,errorDescription)
         }
     }
     
     func getEmailUsedOnLastLogin() -> String? {
         return KeychainManager.shared.getStoredEmail()
-    }
-    
-    func getErrorDescription(_ error: Error) -> String{
-        let moyaError = error as? MoyaError
-        let response = moyaError?.response
-        let statusCode = response?.statusCode ?? 0
-        switch statusCode {
-        case 401:
-            return "Usuário não autorizado"
-        case 403:
-            return "Usuário ou senha incorreta"
-        case 408:
-            return "Tempo de solicitação esgotado"
-        default:
-            return "Um erro inesperado aconteceu ao tentar se conectar com os servidores"
-        }
     }
     
 }

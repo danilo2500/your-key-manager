@@ -63,13 +63,13 @@ class RegisterViewController: UIViewController {
             let password = self.passwordTextField.text!
             let name = self.nameTextField.text!
             
-            self.viewModel.createUser(email: email, password: password, name: name, completion: { [unowned self] (user, error) in
+            self.viewModel.createUser(email: email, password: password, name: name, completion: { [unowned self] (user, errorDescription) in
                 
                 if user != nil {
                     self.showHomeScreen()
                 }
-                if let error = error {
-                    self.showErrorFeedback(error)
+                if let errorDescription = errorDescription {
+                    self.showErrorFeedback(errorDescription)
                 }
             })
             }.disposed(by: disposeBag)
@@ -84,8 +84,7 @@ class RegisterViewController: UIViewController {
         show(homeViewController, sender: nil)
     }
     
-    func showErrorFeedback(_ error: Error){
-        let errorDescription = viewModel.getErrorDescription(error)
+    func showErrorFeedback(_ errorDescription: String){
         print(errorDescription)
     }
     

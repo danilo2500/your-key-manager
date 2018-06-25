@@ -14,21 +14,22 @@ class DevPeopleAPIManager {
     private let devPeopleProvider = MoyaProvider<DevPeopleAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
     private let disposeBag = DisposeBag()
     
-    func signIn(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (User?, String?) -> Void) {
         devPeopleProvider.rx.request(.signIn(email: email, password: password))
             .filterSuccessfulStatusCodes()
             .map(User.self)
-            .subscribe({ (event) in
+            .subscribe({ [unowned self] (event) in
                 switch event {
                 case let .success(user):
                     completion(user, nil)
                 case let .error(error):
-                    completion(nil, error)
+                    let errorDescription = self.getErrorDescription(error)
+                    completion(nil, errorDescription)
                 }
             }).disposed(by: disposeBag)
     }
     
-    func createUser(email: String, password: String, name: String, completion: @escaping (User?, Error?) -> Void) {
+    func createUser(email: String, password: String, name: String, completion: @escaping (User?, String?) -> Void) {
         devPeopleProvider.rx.request(.createUser(email: email, password: password, name: name))
             .filterSuccessfulStatusCodes()
             .map(User.self)
@@ -37,23 +38,70 @@ class DevPeopleAPIManager {
                 case let .success(user):
                     completion(user, nil)
                 case let .error(error):
-                    completion(nil, error)
+                    let errorDescription = self.getErrorDescription(error)
+                    completion(nil, errorDescription)
                 }
             }).disposed(by: disposeBag)
     }
     
-    func requestLogo(websiteURL: String, token: String, completion: @escaping (UIImage?, Error?) -> Void) {
+    func requestLogo(websiteURL: String, token: String, completion: @escaping (UIImage?, String?) -> Void) {
         devPeopleProvider.rx.request(.logo(websiteURL: websiteURL, token: token))
             .filterSuccessfulStatusCodes()
             .mapImage()
-            .subscribe({ (event) in
+            .subscribe({ [unowned self] (event) in
                 switch event{
                 case let .success(logoImage):
                     completion(logoImage, nil)
                 case let .error(error):
-                    completion(nil, error)
+                    let errorDescription = self.getErrorDescription(error)
+                    completion(nil, errorDescription)
                 }
             }).disposed(by: disposeBag)
     }
     
+    private func getErrorDescription(_ error: Error ) -> String{
+        let moyaError = error as? MoyaError
+        let response = moyaError?.response
+        let statusCode = response?.statusCode ?? 0
+        switch statusCode {
+        case 401:
+            return "Usuário não autorizado"
+        case 403:
+            return "Usuário ou senha incorreta"
+        case 408:
+            return "Tempo de solicitação esgotado"
+        case 409:
+            return "Este e-mail já possui um cadastro"
+        default:
+            return "Um erro inesperado aconteceu ao tentar se conectar com os servidores"
+        }
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

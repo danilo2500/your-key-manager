@@ -31,36 +31,18 @@ class RegisterViewModel {
         return not(name.isEmpty)
     }
     
-    func createUser(email: String, password: String, name: String,  completion: @escaping (User?, Error?) -> Void) {
+    func createUser(email: String, password: String, name: String,  completion: @escaping (User?, String?) -> Void) {
         
         isCreatingUser.value = true
         
-        apiManager.createUser(email: email, password: password, name: name) { [unowned self] (user, error) in
+        apiManager.createUser(email: email, password: password, name: name) { [unowned self] (user, errorDescription) in
             
             self.isCreatingUser.value = false
             
             if user != nil {
                 KeychainManager.shared.saveLoginCredentials(email: email, password: password)
             }
-            completion(user, error)
-        }
-    }
-    
-    func getErrorDescription(_ error: Error) -> String {
-        let moyaError = error as? MoyaError
-        let response = moyaError?.response
-        let statusCode = response?.statusCode ?? 0
-        switch statusCode {
-        case 401:
-            return "Usuário não autorizado"
-        case 403:
-            return "Usuário ou senha incorreta"
-        case 408:
-            return "Tempo de solicitação esgotado"
-        case 409:
-            return "Este e-mail já possui um cadastro"
-        default:
-            return "Um erro inesperado aconteceu ao tentar se conectar com os servidores"
+            completion(user, errorDescription)
         }
     }
 }
