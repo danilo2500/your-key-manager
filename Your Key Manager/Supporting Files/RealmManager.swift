@@ -67,6 +67,19 @@ class RealmManager {
         }
     }
     
+    func deleteFromDatabase(_ object: Object) {
+        try! realm.write {
+            realm.delete(object)
+        }
+    }
+    
+    func deleteAllDatabase() {
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+    
+    
     private func getUser(withEmail email: String ) -> Person? {
         return realm.objects(Person.self).filter("email == %@", email).first
     }
