@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 class HomeViewController: UIViewController, UITableViewDelegate {
     
@@ -28,8 +29,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
         viewModel.userEmail = viewModel.fetchUserEmail()
         viewModel.createUserOnDatabaseIfNeeded()
         showUserCredentials()
-        
-        
+
         authenticateTouchIDIfNeeded()
     }
     
@@ -51,9 +51,15 @@ class HomeViewController: UIViewController, UITableViewDelegate {
         credentialsTableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         viewModel.credentials.asObservable()
-            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: UITableViewCell.self)) {
-                index, credential, cell in
-                cell.textLabel!.text = credential.url
+            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) {
+                [unowned self] index, credential, cell in
+                cell.urlLabel.text = credential.url
+                DispatchQueue.main.async {
+                    let url = self.viewModel.getLogoImage(fromUrl: credential.url)
+                    cell.logoImageView!.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (_, _, _, _) in
+                        cell.setNeedsLayout()
+                    })
+                }
         }.disposed(by: disposeBag)
         
     }

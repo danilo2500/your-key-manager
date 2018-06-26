@@ -11,6 +11,7 @@ import RealmSwift
 class Person: Object {
     
     @objc dynamic var email = ""
+    @objc dynamic var token = ""
     let websiteCredentials = List<WebsiteCredential>()
     
     @objc dynamic var id = UUID().uuidString

@@ -14,6 +14,8 @@ import Moya
 class HomeViewModel {
     private let realmManager = RealmManager.shared
     
+    let apiManager = DevPeopleAPIManager()
+    
     var userEmail: String! = nil
     var credentials: Variable<[WebsiteCredential]> = Variable([])
     
@@ -37,6 +39,12 @@ class HomeViewModel {
         
         if not(containsUser) {
             realmManager.createUser(email: userEmail)
+        }
+    }
+    
+    func getLogoImage(fromUrl url: String) {
+        apiManager.requestLogo(websiteURL: url, token: <#T##String#>) { (image, errorDescription) in
+            <#code#>
         }
     }
 }

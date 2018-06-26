@@ -58,7 +58,7 @@ class RealmManager {
         }
     }
     
-    func createUser(email: String) {
+    func createUser(email: String, token: String) {
         let user = Person()
         user.email = email
         
@@ -77,6 +77,20 @@ class RealmManager {
         try! realm.write {
             realm.deleteAll()
         }
+    }
+    
+    func addWebCredentialsForCurrentUserForTesting() {
+        
+        let facebook = WebsiteCredential()
+        facebook.email = "danilo@hotmail.com"
+        facebook.url = "facebook.com"
+        
+        let google = WebsiteCredential()
+        google.email = "danilo@gmail"
+        google.url = "google.com"
+        
+        registerWebsiteCredentialForUser(email: KeychainManager.shared.getStoredEmail()!, websiteCredential: google)
+        registerWebsiteCredentialForUser(email: KeychainManager.shared.getStoredEmail()!, websiteCredential: facebook)
     }
     
     

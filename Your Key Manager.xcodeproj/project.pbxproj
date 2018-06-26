@@ -34,6 +34,7 @@
 		55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD520DED4B5004B960D /* LoginViewModel.swift */; };
 		55F96DD820DEDB90004B960D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD720DEDB90004B960D /* Util.swift */; };
 		6B9E866DC4A0D2095C21680A /* Pods_Your_Key_ManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B756645BCA009B621DFCD1E /* Pods_Your_Key_ManagerUITests.framework */; };
+		9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */; };
 		D051AEB0C3E15EB1E5ACA3A2 /* Pods_Your_Key_ManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679EAA4C26E5E07AA93E1DE0 /* Pods_Your_Key_ManagerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		679EAA4C26E5E07AA93E1DE0 /* Pods_Your_Key_ManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_ManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		816027411A70E7D1F35261EC /* Pods-Your Key Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key Manager.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager.release.xcconfig"; sourceTree = "<group>"; };
 		94B257D71AB51E97C6E4CD15 /* Pods_Your_Key_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialTableViewCell.swift; sourceTree = "<group>"; };
 		A81181572B24C063BE8643CC /* Pods-Your Key ManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key ManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key ManagerUITests/Pods-Your Key ManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 			children = (
 				55F96D9C20DDB592004B960D /* Main.storyboard */,
 				55F96DA120DDB592004B960D /* LaunchScreen.storyboard */,
+				9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */,
 				55F96D9A20DDB592004B960D /* LoginViewController.swift */,
 				5585501720DF19F600FE3767 /* RegisterViewController.swift */,
 				5585501D20DF332E00FE3767 /* HomeViewController.swift */,
@@ -581,6 +584,7 @@
 				5585501A20DF1B3E00FE3767 /* RegisterViewModel.swift in Sources */,
 				5585503120E04A6100FE3767 /* RealmManager.swift in Sources */,
 				55F96DD020DDF212004B960D /* Constants.swift in Sources */,
+				9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */,
 				55F96DD820DEDB90004B960D /* Util.swift in Sources */,
 				5585502C20E0190000FE3767 /* TouchIDAuthentication.swift in Sources */,
 				5585502920E00CBD00FE3767 /* KeychainManager.swift in Sources */,
@@ -761,6 +765,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 889Z62W64R;
 				INFOPLIST_FILE = "Your Key Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Your-Key-Manager.br.com.danilo";
@@ -776,6 +781,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 889Z62W64R;
 				INFOPLIST_FILE = "Your Key Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Your-Key-Manager.br.com.danilo";
