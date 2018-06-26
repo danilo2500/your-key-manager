@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lbf-rz-mzd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lbf-rz-mzd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -150,6 +150,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PWf-v3-M12">
+                                                    <rect key="frame" x="41" y="40" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ABU-xe-uxj" firstAttribute="leading" secondItem="kmH-R5-XmZ" secondAttribute="leading" constant="15" id="MDA-zr-p8d"/>
@@ -158,6 +162,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="emailTextField" destination="azf-za-Gve" id="iyg-yp-w7B"/>
+                                            <outlet property="imageActivityIndicator" destination="PWf-v3-M12" id="hEM-zX-QJ7"/>
                                             <outlet property="logoImageView" destination="ABU-xe-uxj" id="ZnX-kX-Wty"/>
                                             <outlet property="nameLabel" destination="YzN-Jo-kRB" id="r0a-ZZ-GFj"/>
                                             <segue destination="IhL-yA-v6N" kind="show" id="a1T-J5-5fL"/>

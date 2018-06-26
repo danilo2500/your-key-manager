@@ -16,7 +16,6 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var credentialsTableView: UITableView!
     
-    
     let viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
     
@@ -24,7 +23,6 @@ class HomeViewController: UIViewController, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         setupLogOutButton()
         setupTableView()
@@ -57,25 +55,19 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }
     
     func setupTableView() {
-
+        credentialsTableView.tableFooterView = UIView(frame: .zero)
+        
         credentialsTableView.rx.setDelegate(self).disposed(by: disposeBag)
-
-
-
-
-
+        
         viewModel.credentials.asObservable()
-            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) { [weak self] (row, websiteCredential, cell) in
+            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) { [unowned self] (row, websiteCredential, cell) in
                 cell.emailTextField.text =  websiteCredential.email
                 cell.nameLabel.text = websiteCredential.name
                 let URL = websiteCredential.url
-                self!.viewModel.getLogoImage(fromUrl: URL , completion: { (image) in
-                    
+                self.viewModel.getLogoImage(fromUrl: URL , completion: { (image) in
                     cell.logoImageView.image = image
-
+                    cell.imageActivityIndicator.stopAnimating()
                 })
-
-
             }
             .disposed(by: disposeBag)
     }

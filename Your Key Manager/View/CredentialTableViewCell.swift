@@ -10,8 +10,9 @@ import UIKit
 
 class CredentialTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailTextField: UILabel!
+    @IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var logoImageView: UIImageView!
 
 }
