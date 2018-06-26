@@ -81,20 +81,50 @@ class RealmManager {
     
     func addWebCredentialsForCurrentUserForTesting() {
         
-        let facebook = WebsiteCredential()
-        facebook.email = "danilo@hotmail.com"
-        facebook.url = "facebook.com"
-        
+        let results = realm.objects(WebsiteCredential.self)
+        try! realm.write {
+            realm.delete(results)
+        }
         let google = WebsiteCredential()
-        google.email = "danilo@gmail"
-        google.url = "google.com"
+        google.email = "danilo@gmail.com"
+        google.name = "Gmail"
+        
+        let facebook = WebsiteCredential()
+        facebook.email = "sim_danilo@hotmail.com"
+        facebook.name = "Facebook Ppincipal"
+        
+        let facebookFake = WebsiteCredential()
+        facebookFake.email = "fakezao@outlook.com"
+        facebookFake.name = "Facebook Fake"
+        
         
         registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: google)
         registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: facebook)
+        registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: facebookFake)
+        
     }
     
     
     private func getUser(withEmail email: String ) -> Person? {
         return realm.objects(Person.self).filter("email == %@", email).first
     }
+    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

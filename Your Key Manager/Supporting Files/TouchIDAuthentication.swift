@@ -23,7 +23,7 @@ class BiometricIDAuth{
     func authenticateUser(touchIDReason: String, completion: @escaping (Bool, Error?) -> Void) {
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                localizedReason: touchIDReason) { [unowned self] (success, error) in
-                                self.registerUserAuthentication()
+                                SharedPreference.shared.registerUserAuthenticationOnTouchID()
                                 completion(success, error)
         }
     }
@@ -50,15 +50,6 @@ class BiometricIDAuth{
             message = "Touch ID precisa ser configurado"
         }
         return message
-    }
-    
-    func registerUserAuthentication() {
-        UserDefaults.standard.setValue(true, forKey: "TouchIDIsAuthenticated")
-    }
-    
-    func userAlreadyAuthenticated() -> Bool{
-        let TouchIDIsAuthenticated = UserDefaults.standard.bool(forKey: "TouchIDIsAuthenticated")
-        return TouchIDIsAuthenticated
     }
 }
 

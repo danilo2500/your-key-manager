@@ -41,4 +41,25 @@ class SharedPreference {
         let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
         return not(hasLoginKey)
     }
+    
+    func storeKeyIndicatingUserIsLoggedIn() {
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    }
+    
+    func isLoggedIn() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isLoggedIn")
+    }
+    
+    func registerUserAuthenticationOnTouchID() {
+        UserDefaults.standard.setValue(true, forKey: "TouchIDIsAuthenticated")
+    }
+    
+    func userAlreadyAuthenticatedOnTouchID() -> Bool{
+        let TouchIDIsAuthenticated = UserDefaults.standard.bool(forKey: "TouchIDIsAuthenticated")
+        return TouchIDIsAuthenticated
+    }
+    
+    func removeValue(fromKey key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
 }

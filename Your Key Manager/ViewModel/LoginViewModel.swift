@@ -38,9 +38,10 @@ class LoginViewModel {
             
             if let user = user {
                 KeychainManager.shared.storeUserPassword(email: email, password: password)
+                SharedPreference.shared.saveTagIndicatingLoginIsStored()
                 SharedPreference.shared.store(email: email)
                 SharedPreference.shared.store(token: user.token)
-                SharedPreference.shared.saveTagIndicatingLoginIsStored()
+                SharedPreference.shared.storeKeyIndicatingUserIsLoggedIn()
             }
             
             completion(user,errorDescription)

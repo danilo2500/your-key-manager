@@ -11,6 +11,7 @@ import UIKit
 class CredentialTableViewCell: UITableViewCell {
     
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var urlLabel: UILabel!
-    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailTextField: UILabel!
+
 }

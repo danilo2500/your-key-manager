@@ -50,6 +50,8 @@ class LoginViewController: UIViewController {
         
     }
     
+    
+    
     func setupSignInButton() {
         viewModel.canLoginIn
             .throttle(0.1, scheduler: MainScheduler.instance)
@@ -187,13 +189,6 @@ class LoginViewController: UIViewController {
         
         guard let email = SharedPreference.shared.getStoredEmail(), let password = KeychainManager.shared.getUserPassword(email: email) else {
             fatalError("No password or email saved correctly")
-        }
-        
-        DispatchQueue.main.async {
-            self.emailTextField.text = email
-            self.passwordTextField.text = password
-            self.emailTextField.sendActions(for: .valueChanged)
-            self.passwordTextField.sendActions(for: .valueChanged)
         }
         
         self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, error) in

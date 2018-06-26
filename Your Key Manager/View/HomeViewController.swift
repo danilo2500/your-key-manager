@@ -39,7 +39,13 @@ class HomeViewController: UIViewController, UITableViewDelegate {
         }
     }
     
+    @IBAction func adicionar(_ sender: Any) {
+        RealmManager.shared.addWebCredentialsForCurrentUserForTesting()
+    }
+    
     func setupLogOutButton() {
+        
+        
         logOutBarButton.rx.tap.bind { [unowned self] in
             let loginNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginNavigationController")
             self.show(loginNavigationController, sender: nil)
@@ -48,15 +54,17 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }
     
     func setupTableView() {
+        
         credentialsTableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         viewModel.credentials.asObservable()
-            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) {
-                [unowned self] index, credential, cell in
-                cell.urlLabel.text = credential.url
-
-        }.disposed(by: disposeBag)
-        
+            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) { (row, websiteCredential, cell) in
+                cell.emailTextField = websiteCredential.email
+                cell.nameLabel.text = websiteCredential.name
+                let logoImage = viewModel.getLogoImage(fromUrl: websiteCredential.url)
+                
+            }
+            .disposed(by: disposeBag)
     }
     
     func registerBiometricAuth(){
