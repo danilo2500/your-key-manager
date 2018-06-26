@@ -21,10 +21,9 @@ class RealmManager {
     }
 
     func getWebsiteCredentials(forUser email: String) -> [WebsiteCredential]? {
-        guard let user = realm.object(ofType: Person.self, forPrimaryKey: "email == \(email)") else{
+        guard let user = getUser(withEmail: email) else{
             return nil
         }
-        
         return Array(user.websiteCredentials)
     }
 
@@ -33,9 +32,14 @@ class RealmManager {
         return Array(results)
     }
     
+    func containsUser(withEmail email: String) -> Bool {
+        let user = getUser(withEmail: email)
+        return user != nil
+    }
+    
     func registerWebsiteCredentialForUser(email: String, websiteCredential: WebsiteCredential) {
         
-        guard let user = realm.objects(Person.self).filter("email == %@", email).first else{
+        guard let user = getUser(withEmail: email) else{
             fatalError("user not found")
         }
         try! realm.write {
@@ -61,5 +65,9 @@ class RealmManager {
         try! realm.write {
             realm.add(user)
         }
+    }
+    
+    private func getUser(withEmail email: String ) -> Person? {
+        return realm.objects(Person.self).filter("email == %@", email).first
     }
 }

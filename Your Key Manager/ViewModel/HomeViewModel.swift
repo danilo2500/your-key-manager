@@ -12,6 +12,10 @@ import RxSwift
 import Moya
 
 class HomeViewModel {
+    private let realmManager = RealmManager.shared
+    
+    var userEmail: String! = nil
+    var credentials: Variable<[WebsiteCredential]> = Variable([])
     
     func needsToAuthenticateTouchID() -> Bool {
         let userIsAutenticated = BiometricIDAuth.shared.userAlreadyAuthenticated()
@@ -19,8 +23,21 @@ class HomeViewModel {
         return not(userIsAutenticated) && haveTouchIDSupport
     }
     
-    func getWebsiteCredentials() {
+    func fetchWebsiteCredentialsFromUser() -> [WebsiteCredential]? {
+        let websiteCredentials = realmManager.getWebsiteCredentials(forUser: userEmail)
+        return websiteCredentials
+    }
+    
+    func fetchUserEmail() -> String! {
+        return KeychainManager.shared.getStoredEmail()
+    }
+    
+    func createUserOnDatabaseIfNeeded() {
+        let containsUser = realmManager.containsUser(withEmail: userEmail)
         
+        if not(containsUser) {
+            realmManager.createUser(email: userEmail)
+        }
     }
 }
 

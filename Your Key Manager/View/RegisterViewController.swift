@@ -49,7 +49,9 @@ class RegisterViewController: UIViewController {
     }
     
     func setupCreateAccountButton(){
-        viewModel.canCreateUser.subscribe(onNext: { [unowned self] (credentialsAreValid) in
+        viewModel.canCreateUser
+            .throttle(0.1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (credentialsAreValid) in
             self.createAccountButton.isEnabled = credentialsAreValid
         }).disposed(by: disposeBag)
         

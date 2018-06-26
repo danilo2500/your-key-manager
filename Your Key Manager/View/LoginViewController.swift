@@ -48,11 +48,13 @@ class LoginViewController: UIViewController {
         
         viewModel.canLoginIn.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
         
-        
     }
     
     func setupSignInButton() {
-        viewModel.canLoginIn.subscribe(onNext: { [unowned self] (credentialsAreValid) in
+        viewModel.canLoginIn
+            .throttle(0.1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (credentialsAreValid) in
+                print(#function)
             DispatchQueue.main.async {
                 self.signInButton.isEnabled = credentialsAreValid
             }
@@ -166,7 +168,8 @@ class LoginViewController: UIViewController {
     }
     
     func displayBiometryAuth() {
-        BiometricIDAuth.shared.authenticateUser(touchIDReason: "Utilize sua biometria para realizar seu login"){ [unowned self] (sucess, error) in
+        let touchIDReason = "Utilize sua biometria para realizar seu login"
+        BiometricIDAuth.shared.authenticateUser(touchIDReason: touchIDReason){ [unowned self] (sucess, error) in
             if sucess {
                 self.loginAutomaticallyUsingEmailOnKeychain()
             }

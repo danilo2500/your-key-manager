@@ -122,7 +122,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="575-hi-r5s" imageView="o8T-LI-UEj" rowHeight="73" style="IBUITableViewCellStyleDefault" id="Co1-Kw-Y8c">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="credentialCell" textLabel="575-hi-r5s" imageView="o8T-LI-UEj" rowHeight="73" style="IBUITableViewCellStyleDefault" id="Co1-Kw-Y8c">
                                         <rect key="frame" x="0.0" y="28" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Co1-Kw-Y8c" id="kmH-R5-XmZ">
@@ -160,6 +160,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sEs-XT-Ggn"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="credentialsTableView" destination="vT4-YA-7Bf" id="fek-lb-ErY"/>
                         <outlet property="logOutBarButton" destination="dka-H5-WYj" id="QGN-nF-8A5"/>
                     </connections>
                 </viewController>

@@ -9,10 +9,11 @@
 import RealmSwift
 
 class Person: Object {
-    @objc dynamic var id = 0
+    
     @objc dynamic var email = ""
     let websiteCredentials = List<WebsiteCredential>()
     
+    @objc dynamic var id = UUID().uuidString
     override static func primaryKey() -> String? {
         return "id"
     }

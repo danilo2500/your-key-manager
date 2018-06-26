@@ -7,13 +7,16 @@
 //
 
 import RealmSwift
+import RxSwift
 
 class WebsiteCredential: Object {
-    @objc dynamic var id = 0
+    
     @objc dynamic var url = ""
     @objc dynamic var email = ""
     
+    @objc dynamic var id = UUID().uuidString
     override static func primaryKey() -> String? {
         return "id"
     }
+    
 }

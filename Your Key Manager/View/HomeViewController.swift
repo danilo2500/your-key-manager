@@ -9,9 +9,12 @@
 import UIKit
 import RxSwift
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var logOutBarButton: UIBarButtonItem!
+    
+    @IBOutlet weak var credentialsTableView: UITableView!
+    
     
     let viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
@@ -19,23 +22,45 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupLogOutButton()
+        setupTableView()
+        
+        viewModel.userEmail = viewModel.fetchUserEmail()
+        viewModel.createUserOnDatabaseIfNeeded()
+        showUserCredentials()
+        
+        
+        authenticateTouchIDIfNeeded()
+    }
+    
+    func authenticateTouchIDIfNeeded() {
         if viewModel.needsToAuthenticateTouchID(){
             registerBiometricAuth()
         }
-        
-        setupReactiveBinds()
     }
     
-    func setupReactiveBinds() {
+    func setupLogOutButton() {
         logOutBarButton.rx.tap.bind { [unowned self] in
             let loginNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginNavigationController")
             self.show(loginNavigationController, sender: nil)
             }.disposed(by: disposeBag)
+        
+    }
+    
+    func setupTableView() {
+        credentialsTableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
+        viewModel.credentials.asObservable()
+            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credetialCell", cellType: UITableViewCell.self)) {
+                index, credential, cell in
+                cell.textLabel!.text = credential.url
+        }.disposed(by: disposeBag)
+        
     }
     
     func registerBiometricAuth(){
-        
-        BiometricIDAuth.shared.authenticateUser(touchIDReason: "Confirme sua biometria para utilizar TouchID na próxima vez que fizer login") { (sucess, error) in
+        let touchIDReason = "Confirme sua biometria para utilizar TouchID na próxima vez que fizer login"
+        BiometricIDAuth.shared.authenticateUser(touchIDReason: touchIDReason) { (sucess, error) in
             if sucess{
                 print("TOUCH ID CADASTRADO, Agora vc pode logar usando o touch ID")
             }
@@ -46,9 +71,17 @@ class HomeViewController: UIViewController {
     }
     
     func showUserCredentials() {
-        let credentials = viewModel.getWebsiteCredentials()
+    
+        if let credentials = viewModel.fetchWebsiteCredentialsFromUser() {
+            viewModel.credentials.value = credentials
+        }else{
+            showFeedbackWithNoCredentials()
+        }
     }
     
+    func showFeedbackWithNoCredentials() {
+        print("usuario nao tem credenciais salvas")
+    }
     
 }
 
