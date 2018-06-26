@@ -51,7 +51,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
         credentialsTableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         viewModel.credentials.asObservable()
-            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credetialCell", cellType: UITableViewCell.self)) {
+            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: UITableViewCell.self)) {
                 index, credential, cell in
                 cell.textLabel!.text = credential.url
         }.disposed(by: disposeBag)
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }
     
     func showUserCredentials() {
-    
+        
         if let credentials = viewModel.fetchWebsiteCredentialsFromUser() {
             viewModel.credentials.value = credentials
         }else{

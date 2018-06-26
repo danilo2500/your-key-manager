@@ -54,7 +54,6 @@ class LoginViewController: UIViewController {
         viewModel.canLoginIn
             .throttle(0.1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (credentialsAreValid) in
-                print(#function)
             DispatchQueue.main.async {
                 self.signInButton.isEnabled = credentialsAreValid
             }

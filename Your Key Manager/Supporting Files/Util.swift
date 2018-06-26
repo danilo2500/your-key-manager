@@ -12,9 +12,7 @@ let not = (!)
 
 class Util {
     static func isValid(password: String) -> Bool {
-        
         let passwordPredicate = NSPredicate(format:"SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~])[A-Za-z\\dd!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,}")
-        
         return passwordPredicate.evaluate(with: password)
     }
     
