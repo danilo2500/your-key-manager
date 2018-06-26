@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: initialViewControllerIndetifier)
         window!.rootViewController = initialViewController
         
+        
+        
+
+        
         return true
     }
 

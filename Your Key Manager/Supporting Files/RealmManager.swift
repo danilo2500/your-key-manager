@@ -88,19 +88,28 @@ class RealmManager {
         let google = WebsiteCredential()
         google.email = "danilo@gmail.com"
         google.name = "Gmail"
+        google.url = "google.com"
         
         let facebook = WebsiteCredential()
         facebook.email = "sim_danilo@hotmail.com"
         facebook.name = "Facebook Ppincipal"
+        facebook.url = "facebook.com"
         
         let facebookFake = WebsiteCredential()
-        facebookFake.email = "fakezao@outlook.com"
-        facebookFake.name = "Facebook Fake"
+        facebookFake.email = "danilo@outlook.com"
+        facebookFake.name = "Reddit"
+        facebookFake.url = "reddit.com"
+        
+        let last = WebsiteCredential()
+        last.email = "danilo@outlook.com"
+        last.name = "LastFM"
+        last.url = "last.fm"
         
         
         registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: google)
         registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: facebook)
         registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: facebookFake)
+        registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: last)
         
     }
     

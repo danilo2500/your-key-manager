@@ -20,8 +20,11 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     let viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
     
+    let apiManagerLocal = DevPeopleAPIManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         setupLogOutButton()
         setupTableView()
@@ -54,15 +57,25 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }
     
     func setupTableView() {
-        
+
         credentialsTableView.rx.setDelegate(self).disposed(by: disposeBag)
-        
+
+
+
+
+
         viewModel.credentials.asObservable()
-            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) { (row, websiteCredential, cell) in
-                cell.emailTextField = websiteCredential.email
+            .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) { [weak self] (row, websiteCredential, cell) in
+                cell.emailTextField.text =  websiteCredential.email
                 cell.nameLabel.text = websiteCredential.name
-                let logoImage = viewModel.getLogoImage(fromUrl: websiteCredential.url)
-                
+                let URL = websiteCredential.url
+                self!.viewModel.getLogoImage(fromUrl: URL , completion: { (image) in
+                    
+                    cell.logoImageView.image = image
+
+                })
+
+
             }
             .disposed(by: disposeBag)
     }
@@ -93,4 +106,18 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

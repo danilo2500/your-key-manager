@@ -13,7 +13,7 @@ class SharedPreference {
     
     private init() {}
     
-    func store(email: String){
+    func store(email: String) {
         UserDefaults.standard.setValue(email, forKey: "email")
     }
     
@@ -21,15 +21,15 @@ class SharedPreference {
         return UserDefaults.standard.value(forKey: "email") as? String
     }
     
-    func store(token: String){
+    func store(token: String) {
         UserDefaults.standard.setValue(token, forKey: "token")
     }
     
-    func getToken() -> String{
+    func getToken() -> String {
         return UserDefaults.standard.value(forKey: "token") as! String
     }
     
-    func saveTagIndicatingLoginIsStored(){
+    func saveTagIndicatingLoginIsStored() {
         UserDefaults.standard.set(true, forKey: "hasLoginKey")
     }
     

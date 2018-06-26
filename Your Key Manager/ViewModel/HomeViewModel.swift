@@ -13,11 +13,16 @@ import Moya
 
 class HomeViewModel {
     private let realmManager = RealmManager.shared
-    
+    private var userToken: String? = nil
     let apiManager = DevPeopleAPIManager()
     
     var userEmail: String! = nil
     var credentials: Variable<[WebsiteCredential]> = Variable([])
+    
+    init() {
+        
+      
+    }
     
     func needsToAuthenticateTouchID() -> Bool {
         let userIsAutenticated = SharedPreference.shared.userAlreadyAuthenticatedOnTouchID()
@@ -43,10 +48,15 @@ class HomeViewModel {
         }
     }
     
-    func getLogoImage(fromUrl url: String) {
-//        apiManager.requestLogo(websiteURL: url, token: <#T##String#>) { (image, errorDescription) in
-//            <#code#>
-//        }
+    func getLogoImage(fromUrl url: String, completion: @escaping (UIImage?) -> Void ) {
+
+        if self.userToken == nil {
+            self.userToken = SharedPreference.shared.getToken()
+        }
+        
+        apiManager.requestLogo(websiteURL: url, token: userToken!) { (image, error) in
+            completion(image)
+        }
     }
 }
 
