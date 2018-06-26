@@ -35,6 +35,7 @@
 		55F96DD820DEDB90004B960D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD720DEDB90004B960D /* Util.swift */; };
 		6B9E866DC4A0D2095C21680A /* Pods_Your_Key_ManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B756645BCA009B621DFCD1E /* Pods_Your_Key_ManagerUITests.framework */; };
 		9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */; };
+		9F96CFA520E2796B009A48FC /* SharedPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA420E2796B009A48FC /* SharedPreference.swift */; };
 		D051AEB0C3E15EB1E5ACA3A2 /* Pods_Your_Key_ManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679EAA4C26E5E07AA93E1DE0 /* Pods_Your_Key_ManagerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		816027411A70E7D1F35261EC /* Pods-Your Key Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key Manager.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager.release.xcconfig"; sourceTree = "<group>"; };
 		94B257D71AB51E97C6E4CD15 /* Pods_Your_Key_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialTableViewCell.swift; sourceTree = "<group>"; };
+		9F96CFA420E2796B009A48FC /* SharedPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreference.swift; sourceTree = "<group>"; };
 		A81181572B24C063BE8643CC /* Pods-Your Key ManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key ManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key ManagerUITests/Pods-Your Key ManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +255,7 @@
 				55F96DC920DDED35004B960D /* Networking */,
 				5585502120E0048D00FE3767 /* Keychain */,
 				5585503020E04A6100FE3767 /* RealmManager.swift */,
+				9F96CFA420E2796B009A48FC /* SharedPreference.swift */,
 				5585502B20E0190000FE3767 /* TouchIDAuthentication.swift */,
 				55F96DCF20DDF212004B960D /* Constants.swift */,
 				55F96DD720DEDB90004B960D /* Util.swift */,
@@ -586,6 +589,7 @@
 				55F96DD020DDF212004B960D /* Constants.swift in Sources */,
 				9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */,
 				55F96DD820DEDB90004B960D /* Util.swift in Sources */,
+				9F96CFA520E2796B009A48FC /* SharedPreference.swift in Sources */,
 				5585502C20E0190000FE3767 /* TouchIDAuthentication.swift in Sources */,
 				5585502920E00CBD00FE3767 /* KeychainManager.swift in Sources */,
 				55F96DD220DEBC4F004B960D /* User.swift in Sources */,

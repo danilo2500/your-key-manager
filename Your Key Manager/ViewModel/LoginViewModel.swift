@@ -36,8 +36,11 @@ class LoginViewModel {
             
             self.isLoginIn.value = false
             
-            if user != nil {
-                KeychainManager.shared.saveLoginCredentials(email: email, password: password)
+            if let user = user {
+                KeychainManager.shared.storeUserPassword(email: email, password: password)
+                SharedPreference.shared.store(email: email)
+                SharedPreference.shared.store(token: user.token)
+                SharedPreference.shared.saveTagIndicatingLoginIsStored()
             }
             
             completion(user,errorDescription)
@@ -46,7 +49,7 @@ class LoginViewModel {
     }
     
     func getEmailUsedOnLastLogin() -> String? {
-        return KeychainManager.shared.getStoredEmail()
+        return SharedPreference.shared.getStoredEmail()
     }
     
 }

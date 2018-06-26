@@ -54,12 +54,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
             .bind(to: credentialsTableView.rx.items(cellIdentifier: "credentialCell", cellType: CredentialTableViewCell.self)) {
                 [unowned self] index, credential, cell in
                 cell.urlLabel.text = credential.url
-                DispatchQueue.main.async {
-                    let url = self.viewModel.getLogoImage(fromUrl: credential.url)
-                    cell.logoImageView!.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (_, _, _, _) in
-                        cell.setNeedsLayout()
-                    })
-                }
+
         }.disposed(by: disposeBag)
         
     }

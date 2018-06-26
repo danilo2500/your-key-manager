@@ -89,8 +89,8 @@ class RealmManager {
         google.email = "danilo@gmail"
         google.url = "google.com"
         
-        registerWebsiteCredentialForUser(email: KeychainManager.shared.getStoredEmail()!, websiteCredential: google)
-        registerWebsiteCredentialForUser(email: KeychainManager.shared.getStoredEmail()!, websiteCredential: facebook)
+        registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: google)
+        registerWebsiteCredentialForUser(email: SharedPreference.shared.getStoredEmail()!, websiteCredential: facebook)
     }
     
     

@@ -10,22 +10,17 @@ import Foundation
 
 class KeychainManager {
     static let shared = KeychainManager()
+    private let sharedPreference = SharedPreference.shared
     
     private init(){}
     
-    func saveLoginCredentials(email: String, password: String){
-        
-        store(email: email)
-        storePassword(email: email, password: password)
-        saveTagIndicatingLoginIsStored()
+    func storeUserPassword(email: String, password: String){
+        storeUserPasswordOnKeychain(email: email, password: password)
+        sharedPreference.saveTagIndicatingLoginIsStored()
     }
     
-    func getUserPassword() -> String? {
-        
-        guard let email = getStoredEmail() else {
-            fatalError("No email stored")
-        }
-        
+    func getUserPassword(email: String) -> String? {
+
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: email,
@@ -37,19 +32,16 @@ class KeychainManager {
         }
     }
     
-    func getStoredEmail() -> String? {
-        let email = UserDefaults.standard.value(forKey: "email") as? String
-        return email
-    }
-    
-    func hasLoginKeyStored() -> Bool {
-        let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
-        return hasLoginKey
-    }
-    
-    private func doesntHasLoginKeyStored() -> Bool {
-        let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
-        return not(hasLoginKey)
+    private func storeUserPasswordOnKeychain(email: String, password: String) {
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: email,
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            
+            try passwordItem.savePassword(password)
+        } catch {
+            fatalError("Error updating keychain - \(error)")
+        }
     }
     
     func storeWebsitePassword( websiteURL: String, password: String) {
@@ -78,25 +70,6 @@ class KeychainManager {
         }
     }
     
-    private func store(email: String){
-        UserDefaults.standard.setValue(email, forKey: "email")
-    }
-    
-    private func storePassword(email: String, password: String) {
-        do {
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: email,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            
-            try passwordItem.savePassword(password)
-        } catch {
-            fatalError("Error updating keychain - \(error)")
-        }
-    }
-    
-    private func saveTagIndicatingLoginIsStored(){
-        UserDefaults.standard.set(true, forKey: "hasLoginKey")
-    }
-    
+
 }
 

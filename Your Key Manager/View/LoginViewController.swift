@@ -154,7 +154,7 @@ class LoginViewController: UIViewController {
     
     func setupBiometricBarItem() {
         
-        if KeychainManager.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDSupported(){
+        if SharedPreference.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDSupported(){
             biometryBarItem.isEnabled = true
         }else{
             biometryBarItem.isEnabled = false
@@ -185,7 +185,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        guard let password = KeychainManager.shared.getUserPassword(), let email = KeychainManager.shared.getStoredEmail() else {
+        guard let email = SharedPreference.shared.getStoredEmail(), let password = KeychainManager.shared.getUserPassword(email: email) else {
             fatalError("No password or email saved correctly")
         }
         

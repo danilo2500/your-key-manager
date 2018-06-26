@@ -31,21 +31,22 @@ class HomeViewModel {
     }
     
     func fetchUserEmail() -> String! {
-        return KeychainManager.shared.getStoredEmail()
+        return SharedPreference.shared.getStoredEmail()
     }
     
     func createUserOnDatabaseIfNeeded() {
         let containsUser = realmManager.containsUser(withEmail: userEmail)
         
         if not(containsUser) {
-            realmManager.createUser(email: userEmail)
+            let token = SharedPreference.shared.getToken()
+            realmManager.createUser(email: userEmail, token: token)
         }
     }
     
     func getLogoImage(fromUrl url: String) {
-        apiManager.requestLogo(websiteURL: url, token: <#T##String#>) { (image, errorDescription) in
-            <#code#>
-        }
+//        apiManager.requestLogo(websiteURL: url, token: <#T##String#>) { (image, errorDescription) in
+//            <#code#>
+//        }
     }
 }
 
