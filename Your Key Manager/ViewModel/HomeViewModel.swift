@@ -21,8 +21,9 @@ class HomeViewModel {
     var credentials: Variable<[WebsiteCredential]> = Variable([])
     
     func needsToAuthenticateTouchID() -> Bool {
+        let biometricIDAuth = BiometricIDAuth()
         let userIsAutenticated = SharedPreference.shared.userAlreadyAuthenticatedOnTouchID()
-        let haveTouchIDSupport = BiometricIDAuth.shared.isBiometricIDSupported()
+        let haveTouchIDSupport = biometricIDAuth.isBiometricIDSupported()
         return not(userIsAutenticated) && haveTouchIDSupport
     }
     

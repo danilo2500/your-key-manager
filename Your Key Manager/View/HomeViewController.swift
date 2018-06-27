@@ -66,8 +66,10 @@ class HomeViewController: UIViewController {
     
     func registerBiometricAuth(){
         let touchIDReason = "Confirme sua biometria para utilizar TouchID na próxima vez que fizer login"
-        BiometricIDAuth.shared.authenticateUser(touchIDReason: touchIDReason) { (sucess, error) in
+        let biometricIDAuth = BiometricIDAuth()
+        biometricIDAuth.authenticateUser(touchIDReason: touchIDReason) { (sucess, error) in
             if sucess{
+                SharedPreference.shared.registerUserAuthenticationOnTouchID()
                 print("TOUCH ID CADASTRADO, Agora vc pode logar usando o touch ID")
             }
             if let error = error {

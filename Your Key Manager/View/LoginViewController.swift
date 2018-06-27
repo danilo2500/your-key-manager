@@ -156,7 +156,7 @@ class LoginViewController: UIViewController {
     
     func setupBiometricBarItem() {
         
-        if SharedPreference.shared.hasLoginKeyStored() && BiometricIDAuth.shared.isBiometricIDSupported(){
+        if SharedPreference.shared.hasLoginKeyStored() && BiometricIDAuth().isBiometricIDSupported(){
             biometryBarItem.isEnabled = true
         }else{
             biometryBarItem.isEnabled = false
@@ -170,12 +170,13 @@ class LoginViewController: UIViewController {
     
     func displayBiometryAuth() {
         let touchIDReason = "Utilize sua biometria para realizar seu login"
-        BiometricIDAuth.shared.authenticateUser(touchIDReason: touchIDReason){ [unowned self] (sucess, error) in
+        let biometricIDAuth = BiometricIDAuth()
+        biometricIDAuth.authenticateUser(touchIDReason: touchIDReason){ [unowned self] (sucess, error) in
             if sucess {
                 self.loginAutomaticallyUsingEmailOnKeychain()
             }
             if let error = error {
-                print(BiometricIDAuth.shared.getTouchIDErrorMessage(error))
+                print(biometricIDAuth.getTouchIDErrorMessage(error))
             }
         }
     }

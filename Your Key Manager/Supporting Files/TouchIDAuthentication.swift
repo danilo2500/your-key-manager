@@ -9,12 +9,8 @@
 import LocalAuthentication
 
 class BiometricIDAuth{
-    static let shared = BiometricIDAuth()
-    
-    private init(){}
     
     private let context = LAContext()
-    
     
     func isBiometricIDSupported() -> Bool{
         return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
@@ -22,8 +18,7 @@ class BiometricIDAuth{
     
     func authenticateUser(touchIDReason: String, completion: @escaping (Bool, Error?) -> Void) {
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
-                               localizedReason: touchIDReason) { [unowned self] (success, error) in
-                                SharedPreference.shared.registerUserAuthenticationOnTouchID()
+                               localizedReason: touchIDReason) { (success, error) in
                                 completion(success, error)
         }
     }
