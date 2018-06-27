@@ -9,11 +9,12 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SkyFloatingLabelTextField
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
     
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
@@ -115,6 +116,7 @@ class LoginViewController: UIViewController {
             emailTextField.sendActions(for: .valueChanged)
         }
         
+        
         emailTextField.rx.controlEvent(.editingDidEnd)
             .asObservable()
             .subscribe(onNext: { [unowned self] in
@@ -137,6 +139,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupPasswordTextField() {
+        
         passwordTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
             .asObservable()
             .subscribe(onNext: { [unowned self] in

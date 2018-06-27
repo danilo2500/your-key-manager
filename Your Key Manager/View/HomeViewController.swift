@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
+        SharedPreference.shared.storeKeyIndicatingUserHaveLogOut()
         showLoginViewController()
     }
     

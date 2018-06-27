@@ -22,6 +22,8 @@
 		5585503520E07D8600FE3767 /* WebsiteCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585503420E07D8600FE3767 /* WebsiteCredential.swift */; };
 		55CBC26020E2F10E00CD8F39 /* SaveCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CBC25F20E2F10E00CD8F39 /* SaveCredentialViewController.swift */; };
 		55CBC26220E2F1D600CD8F39 /* SaveCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CBC26120E2F1D600CD8F39 /* SaveCredentialViewModel.swift */; };
+		55F7D9DD20E421D50069BBA3 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7D9DC20E421D50069BBA3 /* GradientView.swift */; };
+		55F7D9E020E42AA00069BBA3 /* fontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 55F7D9DF20E42A9F0069BBA3 /* fontAwesome.otf */; };
 		55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9820DDB592004B960D /* AppDelegate.swift */; };
 		55F96D9B20DDB592004B960D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9A20DDB592004B960D /* LoginViewController.swift */; };
 		55F96D9E20DDB592004B960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F96D9C20DDB592004B960D /* Main.storyboard */; };
@@ -78,6 +80,8 @@
 		5585503420E07D8600FE3767 /* WebsiteCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteCredential.swift; sourceTree = "<group>"; };
 		55CBC25F20E2F10E00CD8F39 /* SaveCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCredentialViewController.swift; sourceTree = "<group>"; };
 		55CBC26120E2F1D600CD8F39 /* SaveCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCredentialViewModel.swift; sourceTree = "<group>"; };
+		55F7D9DC20E421D50069BBA3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		55F7D9DF20E42A9F0069BBA3 /* fontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontAwesome.otf; sourceTree = "<group>"; };
 		55F96D9520DDB592004B960D /* Your Key Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Key Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F96D9820DDB592004B960D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F96D9A20DDB592004B960D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,14 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		55F7D9DE20E42A690069BBA3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				55F7D9DF20E42A9F0069BBA3 /* fontAwesome.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		55F96D8C20DDB592004B960D = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +200,7 @@
 				55F96DC820DDB5BF004B960D /* ViewModel */,
 				55F96DCE20DDF1C8004B960D /* Supporting Files */,
 				9F55F34920E3DAD600F6E8A7 /* Extensions */,
+				55F7D9DE20E42A690069BBA3 /* Fonts */,
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
 				55F96D9F20DDB592004B960D /* Assets.xcassets */,
 				55F96DA420DDB592004B960D /* Info.plist */,
@@ -229,6 +242,7 @@
 				55F96D9C20DDB592004B960D /* Main.storyboard */,
 				55F96DA120DDB592004B960D /* LaunchScreen.storyboard */,
 				9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */,
+				55F7D9DC20E421D50069BBA3 /* GradientView.swift */,
 				55F96D9A20DDB592004B960D /* LoginViewController.swift */,
 				5585501720DF19F600FE3767 /* RegisterViewController.swift */,
 				5585501D20DF332E00FE3767 /* HomeViewController.swift */,
@@ -408,6 +422,7 @@
 			files = (
 				55F96DA320DDB592004B960D /* LaunchScreen.storyboard in Resources */,
 				55F96DA020DDB592004B960D /* Assets.xcassets in Resources */,
+				55F7D9E020E42AA00069BBA3 /* fontAwesome.otf in Resources */,
 				55F96D9E20DDB592004B960D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +570,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -566,6 +582,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -611,6 +628,7 @@
 				5585502C20E0190000FE3767 /* TouchIDAuthentication.swift in Sources */,
 				5585502920E00CBD00FE3767 /* KeychainManager.swift in Sources */,
 				55CBC26020E2F10E00CD8F39 /* SaveCredentialViewController.swift in Sources */,
+				55F7D9DD20E421D50069BBA3 /* GradientView.swift in Sources */,
 				55F96DD220DEBC4F004B960D /* User.swift in Sources */,
 				5585501C20DF245C00FE3767 /* Connectivity.swift in Sources */,
 				55F96DCD20DDEE4C004B960D /* DevPeopleAPI.swift in Sources */,

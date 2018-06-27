@@ -12,6 +12,7 @@ target 'Your Key Manager' do
   pod ‘Moya’
   pod ‘Kingfisher’
   pod ‘RealmSwift’
+  pod 'SkyFloatingLabelTextField'
 
   target 'Your Key ManagerTests' do
     inherit! :search_paths
