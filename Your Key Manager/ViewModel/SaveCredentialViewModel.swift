@@ -19,6 +19,11 @@ class SaveCredentialViewModel {
     var canSaveCredential: Observable<Bool> {
         return Observable.combineLatest(email.asObservable(), password.asObservable(), name.asObservable(), URL.asObservable()){
             email, password, name, URL in
+            print("email",email)
+            print("URL",URL)
+            print("password",password)
+            print("name",name)
+            print("------")
             return not(email.isEmpty) && not(password.isEmpty) && not(name.isEmpty) && not(URL.isEmpty)
         }
     }
@@ -34,7 +39,7 @@ class SaveCredentialViewModel {
         websiteCredentia.name = name
         let currentUserEmail = SharedPreference.shared.getStoredEmail()!
         RealmManager.shared.registerWebsiteCredentialForUser(email: currentUserEmail, websiteCredential: websiteCredentia)
-        KeychainManager.shared.storeWebsitePassword(websiteURL: email, password: password)
+        KeychainManager.shared.storeWebsitePassword(userEmail: currentUserEmail, websiteURL: email, password: password)
     }
     
     private func updateWebCredentialOnDatabase() {

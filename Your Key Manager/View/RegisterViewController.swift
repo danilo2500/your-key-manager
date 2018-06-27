@@ -26,6 +26,11 @@ class RegisterViewController: UIViewController {
         setupCreateAccountButton()
         setupEmailFieldField()
         setupPasswordTextField()
+        updateTextFieldWithValues()
+        
+    }
+    
+    func updateTextFieldWithValues() {
         
     }
     

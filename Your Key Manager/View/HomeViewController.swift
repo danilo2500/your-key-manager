@@ -102,13 +102,10 @@ class HomeViewController: UIViewController {
     func showSaveCredentialViewControllerWith(webCredential: WebsiteCredential) {
         let saveCredentialViewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "saveCredentialViewController") as! SaveCredentialViewController
-        
-        saveCredentialViewController.URLTextField.text = webCredential.url
-        //saveCredentialViewController.URLTextField.sendActions(for: .editingDidEnd)
-        saveCredentialViewController.nameTextField.text = webCredential.name
-        //saveCredentialViewController.nameTextField.sendActions(for: .editingDidEnd)
-        saveCredentialViewController.emailTextField.text = webCredential.email
-        //saveCredentialViewController.emailTextField.sendActions(for: .editingDidEnd)
+
+        saveCredentialViewController.viewModel.email.value = webCredential.email
+        saveCredentialViewController.viewModel.name.value = webCredential.name
+        saveCredentialViewController.viewModel.URL.value = webCredential.url        
         
         navigationController!.pushViewController(saveCredentialViewController, animated: true)
     }
