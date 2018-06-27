@@ -27,19 +27,19 @@ class SaveCredentialViewModel {
             return not(email.isEmpty) && not(password.isEmpty) && not(name.isEmpty) && not(URL.isEmpty)
         }
     }
-    
+
     func saveOrUpdateWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
         saveWebCredentialOnDatabase(email: email, url: url, name: name, password: password)
     }
     
     func saveWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
-        let websiteCredentia = WebsiteCredential()
-        websiteCredentia.email = email
-        websiteCredentia.url = url
-        websiteCredentia.name = name
+        let websiteCredential = WebsiteCredential()
+        websiteCredential.email = email
+        websiteCredential.url = url
+        websiteCredential.name = name
         let currentUserEmail = SharedPreference.shared.getStoredEmail()!
-        RealmManager.shared.registerWebsiteCredentialForUser(email: currentUserEmail, websiteCredential: websiteCredentia)
-        KeychainManager.shared.storeWebsitePassword(userEmail: currentUserEmail, websiteURL: email, password: password)
+        RealmManager.shared.registerWebsiteCredentialForUser(email: currentUserEmail, websiteCredential: websiteCredential)
+        KeychainManager.shared.storeWebsitePassword(userEmail: currentUserEmail, websiteURL: url, password: password)
     }
     
     private func updateWebCredentialOnDatabase() {

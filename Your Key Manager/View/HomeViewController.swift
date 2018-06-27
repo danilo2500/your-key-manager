@@ -105,7 +105,9 @@ class HomeViewController: UIViewController {
 
         saveCredentialViewController.viewModel.email.value = webCredential.email
         saveCredentialViewController.viewModel.name.value = webCredential.name
-        saveCredentialViewController.viewModel.URL.value = webCredential.url        
+        saveCredentialViewController.viewModel.URL.value = webCredential.url
+        let password = KeychainManager.shared.getWebsitePassword(userEmail: viewModel.userEmail, websiteURL: webCredential.url)!
+        saveCredentialViewController.viewModel.password.value = password
         
         navigationController!.pushViewController(saveCredentialViewController, animated: true)
     }

@@ -40,26 +40,31 @@ class SaveCredentialViewController: UIViewController {
     func setupReactiveBinds() {
         
         emailTextField.rx.text
-            .map{[unowned self] _ in self.viewModel.email.value}
+            .map{[unowned self] email in
+                return email!.isEmpty ? self.viewModel.email.value : email!
+            }
             .bind(to: viewModel.email)
             .disposed(by: disposeBag)
-        
-        "TROCAR ISSO"
-        passwordTextField.rx.text
-            .map{[unowned self] password in
-                return password ? password : viewModel.password
-                }
-            .bind(to: viewModel.password)
-            .disposed(by: disposeBag)
-        
+    
         nameTextField.rx.text
-            .map{[unowned self] _ in self.viewModel.name.value}
+            .map{[unowned self] name in
+                return name!.isEmpty ? self.viewModel.name.value : name!
+            }
             .bind(to: viewModel.name)
             .disposed(by: disposeBag)
         
         URLTextField.rx.text
-            .map{[unowned self] _ in self.viewModel.URL.value}
+            .map{[unowned self] url in
+            return url!.isEmpty ? self.viewModel.URL.value : url!
+            }
             .bind(to: viewModel.URL)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.text
+            .map{[unowned self] password in
+                return password!.isEmpty ? self.viewModel.password.value : password!
+            }
+            .bind(to: viewModel.password)
             .disposed(by: disposeBag)
         
         viewModel.canSaveCredential
