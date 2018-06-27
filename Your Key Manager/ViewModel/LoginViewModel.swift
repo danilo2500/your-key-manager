@@ -20,6 +20,7 @@ class LoginViewModel {
     
     var isLoginIn = Variable<Bool>(false)
     
+    
     var canLoginIn: Observable<Bool> {
         return Observable.combineLatest(email.asObservable(), password.asObservable(), isLoginIn.asObservable()){
             email, password, isLoginIn  in

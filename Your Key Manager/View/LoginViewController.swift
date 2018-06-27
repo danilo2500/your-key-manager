@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 import SkyFloatingLabelTextField
 
-class LoginViewController: UIViewController {
+
+class LoginViewController: UIViewController{
     
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
@@ -33,6 +34,7 @@ class LoginViewController: UIViewController {
         setupEmailFieldField()
         setupPasswordTextField()
         setupBiometricBarItem()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -209,12 +211,6 @@ class LoginViewController: UIViewController {
     }
 
 }
-
-
-
-
-
-
 
 
 
