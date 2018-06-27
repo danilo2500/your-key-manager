@@ -10,14 +10,8 @@ import Foundation
 
 class KeychainManager {
     static let shared = KeychainManager()
-    private let sharedPreference = SharedPreference.shared
     
     private init(){}
-    
-    func storeUserPassword(email: String, password: String){
-        storeUserPasswordOnKeychain(email: email, password: password)
-        sharedPreference.saveTagIndicatingLoginIsStored()
-    }
     
     func getUserPassword(email: String) -> String? {
 
@@ -32,7 +26,7 @@ class KeychainManager {
         }
     }
     
-    private func storeUserPasswordOnKeychain(email: String, password: String) {
+    func storeUserPassword(email: String, password: String) {
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: email,
