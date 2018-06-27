@@ -204,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="364" y="782.15892053973016"/>
         </scene>
-        <!--Title-->
+        <!--Adicionar-->
         <scene sceneID="TG0-Lf-F6K">
             <objects>
-                <viewController storyboardIdentifier="saveCredentialViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GOc-g3-OUn" customClass="SaveCredentialViewController" customModule="Your_Key_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="saveCredentialViewController" title="Adicionar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GOc-g3-OUn" customClass="SaveCredentialViewController" customModule="Your_Key_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OUk-pw-fGf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -268,6 +268,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRR-3W-6Da">
+                                <rect key="frame" x="37" y="355" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mostrar senha"/>
+                                <connections>
+                                    <action selector="showOrHidePassword:" destination="GOc-g3-OUn" eventType="touchUpInside" id="KhU-37-Pvd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="kQQ-8d-gig"/>
@@ -285,6 +293,7 @@
                         <outlet property="nameTextField" destination="N9F-c5-HFn" id="iJk-i0-gtZ"/>
                         <outlet property="passwordTextField" destination="rBc-0I-kFs" id="eeP-9C-AD6"/>
                         <outlet property="saveBarButton" destination="FzF-8r-OJI" id="WFu-mx-Eu3"/>
+                        <outlet property="showHidePasswordButton" destination="cRR-3W-6Da" id="bYe-LK-JTa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28i-Cp-62f" userLabel="First Responder" sceneMemberID="firstResponder"/>

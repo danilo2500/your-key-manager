@@ -16,6 +16,7 @@ class SaveCredentialViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
+    @IBOutlet weak var showHidePasswordButton: UIButton!
     
     let viewModel = SaveCredentialViewModel()
     let disposeBag = DisposeBag()
@@ -30,11 +31,29 @@ class SaveCredentialViewController: UIViewController {
         navigationController!.popViewController(animated: true)
     }
     
+    @IBAction func showOrHidePassword(_ sender: Any) {
+        passwordTextField.isSecureTextEntry.toggle()
+        let title = passwordTextField.isSecureTextEntry ? "Mostrar Senha" : "Ocultar Senha"
+        showHidePasswordButton.setTitle(title, for: .normal)
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupReactiveBinds()
         setupTextFieldsWithValuesIfNeeded()
+        setupNavigationTitle()
+    }
+    
+    func setupNavigationTitle() {
+        if viewModel.saveCredentialTask == .saving{
+            title = "Adicionar"
+        }
+        if viewModel.saveCredentialTask == .updating{
+            title = "Editar"
+        }
     }
     
     func setupReactiveBinds() {

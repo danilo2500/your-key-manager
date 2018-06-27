@@ -9,14 +9,16 @@
 import Foundation
 import RxSwift
 
-enum saveCredentialTask {
-    case saving
-    case updating
-}
+
 
 class SaveCredentialViewModel {
     
-    var saveCredentialTask: saveCredentialTask! = nil
+    enum SaveCredentialTask {
+        case saving
+        case updating
+    }
+    
+    var saveCredentialTask: SaveCredentialTask! = nil
     
     lazy var userEmail = SharedPreference.shared.getStoredEmail()!
     
@@ -38,11 +40,6 @@ class SaveCredentialViewModel {
     var canSaveCredential: Observable<Bool> {
         return Observable.combineLatest(email.asObservable(), password.asObservable(), name.asObservable(), URL.asObservable()){
             email, password, name, URL in
-            print("email",email)
-            print("URL",URL)
-            print("password",password)
-            print("name",name)
-            print("------")
             return not(email.isEmpty) && not(password.isEmpty) && not(name.isEmpty) && not(URL.isEmpty)
         }
     }

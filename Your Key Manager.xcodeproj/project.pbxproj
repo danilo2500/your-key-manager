@@ -36,6 +36,7 @@
 		55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD520DED4B5004B960D /* LoginViewModel.swift */; };
 		55F96DD820DEDB90004B960D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD720DEDB90004B960D /* Util.swift */; };
 		6B9E866DC4A0D2095C21680A /* Pods_Your_Key_ManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B756645BCA009B621DFCD1E /* Pods_Your_Key_ManagerUITests.framework */; };
+		9F55F34B20E3DAE700F6E8A7 /* Extension+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F55F34A20E3DAE700F6E8A7 /* Extension+Bool.swift */; };
 		9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */; };
 		9F96CFA520E2796B009A48FC /* SharedPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA420E2796B009A48FC /* SharedPreference.swift */; };
 		D051AEB0C3E15EB1E5ACA3A2 /* Pods_Your_Key_ManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679EAA4C26E5E07AA93E1DE0 /* Pods_Your_Key_ManagerTests.framework */; };
@@ -100,6 +101,7 @@
 		679EAA4C26E5E07AA93E1DE0 /* Pods_Your_Key_ManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_ManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		816027411A70E7D1F35261EC /* Pods-Your Key Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key Manager.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager.release.xcconfig"; sourceTree = "<group>"; };
 		94B257D71AB51E97C6E4CD15 /* Pods_Your_Key_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F55F34A20E3DAE700F6E8A7 /* Extension+Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Bool.swift"; sourceTree = "<group>"; };
 		9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialTableViewCell.swift; sourceTree = "<group>"; };
 		9F96CFA420E2796B009A48FC /* SharedPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreference.swift; sourceTree = "<group>"; };
 		A81181572B24C063BE8643CC /* Pods-Your Key ManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key ManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key ManagerUITests/Pods-Your Key ManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				55F96DC720DDB5B5004B960D /* View */,
 				55F96DC820DDB5BF004B960D /* ViewModel */,
 				55F96DCE20DDF1C8004B960D /* Supporting Files */,
+				9F55F34920E3DAD600F6E8A7 /* Extensions */,
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
 				55F96D9F20DDB592004B960D /* Assets.xcassets */,
 				55F96DA420DDB592004B960D /* Info.plist */,
@@ -267,6 +270,14 @@
 				55F96DD720DEDB90004B960D /* Util.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9F55F34920E3DAD600F6E8A7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F55F34A20E3DAE700F6E8A7 /* Extension+Bool.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B817816A61E22D7AE20D8A73 /* Frameworks */ = {
@@ -607,6 +618,7 @@
 				5585503320E07D2B00FE3767 /* Person.swift in Sources */,
 				55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */,
 				5585503520E07D8600FE3767 /* WebsiteCredential.swift in Sources */,
+				9F55F34B20E3DAE700F6E8A7 /* Extension+Bool.swift in Sources */,
 				5585501E20DF332E00FE3767 /* HomeViewController.swift in Sources */,
 				5585502320E004E700FE3767 /* KeychainConfiguration.swift in Sources */,
 				5585502020E003FE00FE3767 /* KeychainPasswordItem.swift in Sources */,
