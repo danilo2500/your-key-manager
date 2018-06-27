@@ -85,6 +85,15 @@ class RealmManager {
         }
     }
     
+    func update(webCredential: WebsiteCredential ,withEmail email: String, name: String, url: String) {
+
+        try! realm.write {
+            webCredential.email = email
+            webCredential.name = name
+            webCredential.url = url
+        }
+    }
+    
     private func getUser(withEmail email: String ) -> Person? {
         return realm.objects(Person.self).filter("email == %@", email).first
     }

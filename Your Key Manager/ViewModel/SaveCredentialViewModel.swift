@@ -9,7 +9,26 @@
 import Foundation
 import RxSwift
 
+enum saveCredentialTask {
+    case saving
+    case updating
+}
+
 class SaveCredentialViewModel {
+    
+    var saveCredentialTask: saveCredentialTask! = nil
+    
+    lazy var userEmail = SharedPreference.shared.getStoredEmail()!
+    
+    var updatedWebCredential: WebsiteCredential!{
+        didSet{
+            email.value = updatedWebCredential.email
+            name.value = updatedWebCredential.name
+            URL.value = updatedWebCredential.url
+            let storedPassword = KeychainManager.shared.getWebsitePassword(userEmail: userEmail, websiteURL: updatedWebCredential.url)
+            password.value = storedPassword
+        }
+    }
     
     let URL = Variable<String>("")
     let name = Variable<String>("")
@@ -29,10 +48,16 @@ class SaveCredentialViewModel {
     }
 
     func saveOrUpdateWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
-        saveWebCredentialOnDatabase(email: email, url: url, name: name, password: password)
+        if saveCredentialTask == .saving {
+            saveWebCredentialOnDatabase(email: email, url: url, name: name, password: password)
+        }
+        if saveCredentialTask == .updating {
+            updateWebCredentialOnDatabase(email: email, url: url, name: name, password: password)
+        }
+        
     }
     
-    func saveWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
+    private func saveWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
         let websiteCredential = WebsiteCredential()
         websiteCredential.email = email
         websiteCredential.url = url
@@ -42,7 +67,8 @@ class SaveCredentialViewModel {
         KeychainManager.shared.storeWebsitePassword(userEmail: currentUserEmail, websiteURL: url, password: password)
     }
     
-    private func updateWebCredentialOnDatabase() {
-        
+    private func updateWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
+        RealmManager.shared.update(webCredential: updatedWebCredential, withEmail: email, name: name, url: url )
+        KeychainManager.shared.storeWebsitePassword(userEmail: userEmail, websiteURL: url, password: password)
     }
 }

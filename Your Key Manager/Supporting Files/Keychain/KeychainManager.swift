@@ -57,7 +57,7 @@ class KeychainManager {
         }
     }
     
-    func getWebsitePassword(userEmail: String, websiteURL: String) -> String? {
+    func getWebsitePassword(userEmail: String, websiteURL: String) -> String {
         
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,

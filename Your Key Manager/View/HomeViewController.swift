@@ -95,7 +95,8 @@ class HomeViewController: UIViewController {
     }
     
     func showSaveCredentialViewController() {
-        let saveCredentialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "saveCredentialViewController")
+        let saveCredentialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "saveCredentialViewController") as! SaveCredentialViewController
+        saveCredentialViewController.viewModel.saveCredentialTask = .saving
         navigationController?.pushViewController(saveCredentialViewController, animated: true)
     }
     
@@ -103,11 +104,8 @@ class HomeViewController: UIViewController {
         let saveCredentialViewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "saveCredentialViewController") as! SaveCredentialViewController
 
-        saveCredentialViewController.viewModel.email.value = webCredential.email
-        saveCredentialViewController.viewModel.name.value = webCredential.name
-        saveCredentialViewController.viewModel.URL.value = webCredential.url
-        let password = KeychainManager.shared.getWebsitePassword(userEmail: viewModel.userEmail, websiteURL: webCredential.url)!
-        saveCredentialViewController.viewModel.password.value = password
+        saveCredentialViewController.viewModel.updatedWebCredential = webCredential
+        saveCredentialViewController.viewModel.saveCredentialTask = .updating
         
         navigationController!.pushViewController(saveCredentialViewController, animated: true)
     }
