@@ -55,7 +55,8 @@ class RegisterViewController: UIViewController {
         viewModel.canCreateUser
             .throttle(0.1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (credentialsAreValid) in
-            self.createAccountButton.isEnabled = credentialsAreValid
+                self.createAccountButton.isEnabled = credentialsAreValid
+                self.createAccountButton.alpha = credentialsAreValid ? 1.0 : 0.5
         }).disposed(by: disposeBag)
         
         createAccountButton.rx.tap.bind{ [unowned self] in

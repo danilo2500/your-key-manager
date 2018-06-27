@@ -63,6 +63,8 @@ class LoginViewController: UIViewController{
             .subscribe(onNext: { [unowned self] (credentialsAreValid) in
             DispatchQueue.main.async {
                 self.signInButton.isEnabled = credentialsAreValid
+                
+                self.signInButton.alpha = credentialsAreValid ? 1.0 : 0.5
             }
         }).disposed(by: disposeBag)
         

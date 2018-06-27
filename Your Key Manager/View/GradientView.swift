@@ -6,7 +6,6 @@
 //  Copyright © 2018 Danilo Henrique. All rights reserved.
 //
 
-
 import UIKit
 
 class GradientView: UIView {
@@ -21,3 +20,4 @@ class GradientView: UIView {
         (layer as! CAGradientLayer).colors = [colorOne.cgColor, colorTwo.cgColor]
     }
 }
+
