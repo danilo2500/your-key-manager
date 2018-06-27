@@ -44,11 +44,11 @@ class KeychainManager {
         }
     }
     
-    func storeWebsitePassword(userEmail: String, websiteURL: String, password: String) {
+    func storeWebsitePassword(credentialID: String, password: String) {
         
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: userEmail + websiteURL,
+                                                    account: credentialID,
                                                     accessGroup: KeychainConfiguration.accessGroup)
             
             try passwordItem.savePassword(password)
@@ -57,11 +57,11 @@ class KeychainManager {
         }
     }
     
-    func getWebsitePassword(userEmail: String, websiteURL: String) -> String {
+    func getWebsitePassword(credentialID: String) -> String {
         
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: userEmail + websiteURL,
+                                                    account: credentialID,
                                                     accessGroup: KeychainConfiguration.accessGroup)
             let keychainPassword = try passwordItem.readPassword()
             return keychainPassword
@@ -70,6 +70,16 @@ class KeychainManager {
         }
     }
     
+    func removeWebsitePassword(credentialID: String) {
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: credentialID,
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            try passwordItem.deleteItem()
+        } catch {
+            fatalError("Error reading password from keychain - \(error)")
+        }
+    }
 
 }
 

@@ -25,7 +25,7 @@ class SaveCredentialViewModel {
             email.value = updatedWebCredential.email
             name.value = updatedWebCredential.name
             URL.value = updatedWebCredential.url
-            let storedPassword = KeychainManager.shared.getWebsitePassword(userEmail: userEmail, websiteURL: updatedWebCredential.url)
+            let storedPassword = KeychainManager.shared.getWebsitePassword(credentialID: updatedWebCredential.id)
             password.value = storedPassword
         }
     }
@@ -64,11 +64,11 @@ class SaveCredentialViewModel {
         websiteCredential.name = name
         let currentUserEmail = SharedPreference.shared.getStoredEmail()!
         RealmManager.shared.registerWebsiteCredentialForUser(email: currentUserEmail, websiteCredential: websiteCredential)
-        KeychainManager.shared.storeWebsitePassword(userEmail: currentUserEmail, websiteURL: url, password: password)
+        KeychainManager.shared.storeWebsitePassword(credentialID: websiteCredential.id, password: password)
     }
     
     private func updateWebCredentialOnDatabase(email: String, url: String, name: String, password: String) {
         RealmManager.shared.update(webCredential: updatedWebCredential, withEmail: email, name: name, url: url )
-        KeychainManager.shared.storeWebsitePassword(userEmail: userEmail, websiteURL: url, password: password)
+        KeychainManager.shared.storeWebsitePassword(credentialID: updatedWebCredential.id, password: password)
     }
 }

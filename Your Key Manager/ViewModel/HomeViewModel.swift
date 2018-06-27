@@ -9,6 +9,7 @@
 
 import Foundation
 import RxSwift
+import Kingfisher
 import Moya
 
 class HomeViewModel {
@@ -44,14 +45,38 @@ class HomeViewModel {
     }
     
     func getLogoImage(fromUrl url: String, completion: @escaping (UIImage?) -> Void ) {
-
+        
+        if let cachedImage = retrieveImageOnCache(url: url) {
+            completion(cachedImage)
+            return
+        }
+        
         if self.userToken == nil {
             self.userToken = SharedPreference.shared.getToken()
         }
         
-        apiManager.requestLogo(websiteUrl: url, token: userToken!) { (image, error) in
+        apiManager.requestLogo(websiteUrl: url, token: userToken!) { [unowned self] (image, error) in
+            if let image = image{
+                self.storeImageOnCache(image: image, url: url)
+            }
             completion(image)
         }
+    }
+    
+    private func retrieveImageOnCache(url: String) -> UIImage? {
+        let imageCache = ImageCache(name: "imageCache")
+        let image = imageCache.retrieveImageInDiskCache(forKey: url)
+        return image
+    }
+    
+    private func storeImageOnCache(image: UIImage, url: String) {
+        let imageCache = ImageCache(name: "imageCache")
+        imageCache.store(image, forKey: url)
+    }
+    
+    func removeWebcredentialFromDatabase(_ webcredential: WebsiteCredential){
+        KeychainManager.shared.removeWebsitePassword(credentialID: webcredential.id)
+        RealmManager.shared.deleteFromDatabase(webcredential)
     }
 }
 

@@ -137,6 +137,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let webCredential = viewModel.credentials.value[indexPath.row]
         showSaveCredentialViewControllerWith(webCredential: webCredential)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let webCredential = viewModel.credentials.value[indexPath.row]
+            viewModel.removeWebcredentialFromDatabase(webCredential)
+            viewModel.credentials.value.remove(at: indexPath.row)
+        }
+    }
 }
 
 
