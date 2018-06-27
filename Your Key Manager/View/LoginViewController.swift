@@ -34,6 +34,10 @@ class LoginViewController: UIViewController {
         setupBiometricBarItem()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func setupReactiveBinds() {
         
         emailTextField.rx.text
@@ -49,8 +53,6 @@ class LoginViewController: UIViewController {
         viewModel.canLoginIn.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
         
     }
-    
-    
     
     func setupSignInButton() {
         viewModel.canLoginIn

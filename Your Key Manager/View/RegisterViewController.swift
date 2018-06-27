@@ -25,13 +25,11 @@ class RegisterViewController: UIViewController {
         setupReactiveBinds()
         setupCreateAccountButton()
         setupEmailFieldField()
-        setupPasswordTextField()
-        updateTextFieldWithValues()
-        
+        setupPasswordTextField()        
     }
     
-    func updateTextFieldWithValues() {
-        
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     func setupReactiveBinds(){
