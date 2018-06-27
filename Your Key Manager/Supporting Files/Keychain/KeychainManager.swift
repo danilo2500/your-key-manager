@@ -44,11 +44,11 @@ class KeychainManager {
         }
     }
     
-    func storeWebsitePassword( websiteURL: String, password: String) {
+    func storeWebsitePassword(userEmail: String, websiteURL: String, password: String) {
         
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: websiteURL,
+                                                    account: userEmail + websiteURL,
                                                     accessGroup: KeychainConfiguration.accessGroup)
             
             try passwordItem.savePassword(password)
@@ -57,11 +57,11 @@ class KeychainManager {
         }
     }
     
-    func getWebsitePassword( websiteURL: String) -> String? {
+    func getWebsitePassword(userEmail: String, websiteURL: String) -> String? {
         
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: websiteURL,
+                                                    account: userEmail + websiteURL,
                                                     accessGroup: KeychainConfiguration.accessGroup)
             let keychainPassword = try passwordItem.readPassword()
             return keychainPassword
