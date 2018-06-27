@@ -32,6 +32,11 @@ class RealmManager {
         return Array(results)
     }
     
+    func getAllWebCredentialsForDebug() -> [WebsiteCredential]{
+        let results = realm.objects(WebsiteCredential.self)
+        return Array(results)
+    }
+    
     func containsUser(withEmail email: String) -> Bool {
         let user = getUser(withEmail: email)
         return user != nil
@@ -48,9 +53,10 @@ class RealmManager {
         
     }
     
-    func createWebsiteCredential(email: String, url: String) {
+    func createWebsiteCredential(email: String, url: String, name: String) {
         let websiteCredential = WebsiteCredential()
         websiteCredential.email = email
+        websiteCredential.name = name
         websiteCredential.url = url
         
         try! realm.write {

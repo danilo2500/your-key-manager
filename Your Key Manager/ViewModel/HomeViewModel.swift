@@ -19,11 +19,6 @@ class HomeViewModel {
     var userEmail: String! = nil
     var credentials: Variable<[WebsiteCredential]> = Variable([])
     
-    init() {
-        
-      
-    }
-    
     func needsToAuthenticateTouchID() -> Bool {
         let userIsAutenticated = SharedPreference.shared.userAlreadyAuthenticatedOnTouchID()
         let haveTouchIDSupport = BiometricIDAuth.shared.isBiometricIDSupported()
@@ -54,7 +49,7 @@ class HomeViewModel {
             self.userToken = SharedPreference.shared.getToken()
         }
         
-        apiManager.requestLogo(websiteURL: url, token: userToken!) { (image, error) in
+        apiManager.requestLogo(websiteUrl: url, token: userToken!) { (image, error) in
             completion(image)
         }
     }

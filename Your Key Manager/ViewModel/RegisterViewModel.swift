@@ -22,13 +22,9 @@ class RegisterViewModel {
     
     var canCreateUser: Observable<Bool> {
         return Observable.combineLatest(email.asObservable(), password.asObservable(), name.asObservable(), isCreatingUser.asObservable()){
-            [unowned self] email, password, name, isCreatingUser in
-            return Util.isValid(email: email) && Util.isValid(password: password) && self.nameIsntEmpty(name) && not(isCreatingUser)
+            email, password, name, isCreatingUser in
+            return Util.isValid(email: email) && Util.isValid(password: password) && not(name.isEmpty) && not(isCreatingUser)
         }
-    }
-    
-    func nameIsntEmpty(_ name: String) -> Bool {
-        return not(name.isEmpty)
     }
     
     func createUser(email: String, password: String, name: String,  completion: @escaping (User?, String?) -> Void) {

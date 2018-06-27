@@ -44,8 +44,8 @@ class DevPeopleAPIManager {
             }).disposed(by: disposeBag)
     }
     
-    func requestLogo(websiteURL: String, token: String, completion: @escaping (UIImage?, String?) -> Void) {
-        devPeopleProvider.rx.request(.logo(websiteURL: websiteURL, token: token))
+    func requestLogo(websiteUrl: String, token: String, completion: @escaping (UIImage?, String?) -> Void) {
+        devPeopleProvider.rx.request(.logo(websiteURL: websiteUrl, token: token))
             .filterSuccessfulStatusCodes()
             .mapImage()
             .subscribe({ [unowned self] (event) in
