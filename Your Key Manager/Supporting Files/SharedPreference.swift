@@ -42,18 +42,6 @@ class SharedPreference {
         return not(hasLoginKey)
     }
     
-    func storeKeyIndicatingUserIsLoggedIn() {
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-    }
-    
-    func storeKeyIndicatingUserHaveLogOut() {
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
-    }
-    
-    func isLoggedIn() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isLoggedIn")
-    }
-    
     func registerUserAuthenticationOnTouchID() {
         UserDefaults.standard.setValue(true, forKey: "TouchIDIsAuthenticated")
     }

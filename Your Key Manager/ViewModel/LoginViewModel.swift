@@ -42,7 +42,6 @@ class LoginViewModel {
                 SharedPreference.shared.saveTagIndicatingLoginIsStored()
                 SharedPreference.shared.store(email: email)
                 SharedPreference.shared.store(token: user.token)
-                SharedPreference.shared.storeKeyIndicatingUserIsLoggedIn()
             }
             
             completion(user,errorDescription)

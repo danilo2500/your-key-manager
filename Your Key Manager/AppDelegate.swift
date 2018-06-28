@@ -17,12 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let userIsLogIn = SharedPreference.shared.isLoggedIn()
-        let initialViewControllerIndetifier = userIsLogIn ? "homeNavigationController" : "loginNavigationController"
-        let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: initialViewControllerIndetifier) as! UINavigationController
-        
-        window!.rootViewController = initialViewController
-        
         return true
     }
 

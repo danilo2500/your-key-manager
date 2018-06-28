@@ -133,7 +133,6 @@ class HomeViewController: UIViewController {
         let alertController = UIAlertController(title: "Sair", message: "Tem certeza que deseja sair da sua conta?", preferredStyle: .alert)
         
         let acceptButton = UIAlertAction(title: "Sim", style: .default) { [unowned self] _ in
-            SharedPreference.shared.storeKeyIndicatingUserHaveLogOut()
             self.showLoginViewController()
         }
         let cancelButton = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)

@@ -39,7 +39,6 @@ class RegisterViewModel {
                 KeychainManager.shared.storeUserPassword(email: email, password: password)
                 SharedPreference.shared.store(email: email)
                 SharedPreference.shared.store(token: user.token)
-                SharedPreference.shared.storeKeyIndicatingUserIsLoggedIn()
                 SharedPreference.shared.saveTagIndicatingLoginIsStored()
             }
             completion(user, errorDescription)
