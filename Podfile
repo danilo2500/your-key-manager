@@ -13,6 +13,7 @@ target 'Your Key Manager' do
   pod ‘Kingfisher’
   pod ‘RealmSwift’
   pod 'SkyFloatingLabelTextField'
+  pod 'AMPopTip'
 
 
   target 'Your Key ManagerTests' do

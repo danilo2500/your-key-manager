@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SkyFloatingLabelTextField
+import AMPopTip
 
 
 class LoginViewController: UIViewController{
@@ -24,21 +25,26 @@ class LoginViewController: UIViewController{
     
     let viewModel = LoginViewModel()
     let disposeBag = DisposeBag()
+    let popTip = PopTip()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        setupPopUp()
         setupReactiveBinds()
         setupSignInButton()
         setupRegisterButton()
         setupEmailFieldField()
         setupPasswordTextField()
         setupBiometricBarItem()
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func setupPopUp() {
+        popTip.textAlignment = .left
     }
     
     func setupReactiveBinds() {
@@ -63,7 +69,6 @@ class LoginViewController: UIViewController{
             .subscribe(onNext: { [unowned self] (credentialsAreValid) in
             DispatchQueue.main.async {
                 self.signInButton.isEnabled = credentialsAreValid
-                
                 self.signInButton.alpha = credentialsAreValid ? 1.0 : 0.5
             }
         }).disposed(by: disposeBag)
@@ -90,7 +95,7 @@ class LoginViewController: UIViewController{
     }
     
     func showNoInternetConnectionError() {
-        print("Vc esta sem internet")
+        popTip.show(text: "Verifique sua conexão com a internet", direction: .up, maxWidth: 220, in: view, from: signInButton.frame)
     }
     
     func showErrorFeedback(_ errorDescription: String) {
@@ -120,14 +125,11 @@ class LoginViewController: UIViewController{
             emailTextField.sendActions(for: .valueChanged)
         }
         
-        
         emailTextField.rx.controlEvent(.editingDidEnd)
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let email = self.emailTextField.text else { return }
-                if Util.isValid(email: email){
-                    self.dismissEmailValidationInformation()
-                }else{
+                if not(Util.isValid(email: email)){
                     self.showEmailValidationInformation()
                 }
                 
@@ -135,11 +137,8 @@ class LoginViewController: UIViewController{
     }
     
     func showEmailValidationInformation() {
-        print("formato de email incorreto")
-    }
-    
-    func dismissEmailValidationInformation() {
-        print("vc escreveu o email correto")
+        let tip = emailTextField.text!.isEmpty ? "E-mail precisa ser prenchido" : "E-mail incorreto"
+        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: emailTextField.frame)
     }
     
     func setupPasswordTextField() {
@@ -148,21 +147,17 @@ class LoginViewController: UIViewController{
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let password = self.passwordTextField.text else { return }
-                if Util.isValid(password: password){
-                    self.dismissPasswordValidationInformation()
-                }else{
+                if not(Util.isValid(password: password)){
                     self.showPasswordValidationInformation()
                 }
             }).disposed(by: disposeBag)
     }
     
     func showPasswordValidationInformation() {
-        print("A senha deverá conter no mínimo 8 caracteres, dos quais deve possuir no mínimo 1 letra, 1 número e 1 caractere especial")
+        let tip = "Senha precisa conter:\n8 caracteres;\nUm número;\nUma letra maiúscula;\nUma letra minúscula;\nUm caractere especial."
+        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: passwordTextField.frame)
     }
-    func dismissPasswordValidationInformation() {
-        print("vc escreveu a senha correto")
-    }
-    
+
     func setupBiometricBarItem() {
         
         if SharedPreference.shared.hasLoginKeyStored() && BiometricIDAuth().isBiometricIDSupported(){

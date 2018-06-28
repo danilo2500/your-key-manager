@@ -6,18 +6,21 @@
 //
 
 import UIKit
+import AMPopTip
 import RxSwift
+import SkyFloatingLabelTextField
 
 class RegisterViewController: UIViewController {
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var nameTextField: SkyFloatingLabelTextField!
     
     @IBOutlet weak var createAccountButton: UIButton!
     
     let viewModel = RegisterViewModel()
     let disposeBag = DisposeBag()
+    let popTip = PopTip()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +28,24 @@ class RegisterViewController: UIViewController {
         setupReactiveBinds()
         setupCreateAccountButton()
         setupEmailFieldField()
-        setupPasswordTextField()        
+        setupPasswordTextField()
+        setupPopUp()
+        
+        popTip.appearHandler = { pop in
+            print("aparecendo")
+        }
+        popTip.dismissHandler = { _ in
+            print("sumindo")
+            
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func setupPopUp() {
+        popTip.textAlignment = .left
     }
     
     func setupReactiveBinds(){
@@ -82,7 +98,7 @@ class RegisterViewController: UIViewController {
     }
     
     func showNoInternetConnectionError() {
-        print("Vc esta sem internet")
+        popTip.show(text: "Verifique sua conexão com a internet", direction: .up, maxWidth: 220, in: view, from: createAccountButton.frame)
     }
     
     func showHomeScreen(){
@@ -91,7 +107,7 @@ class RegisterViewController: UIViewController {
     }
     
     func showErrorFeedback(_ errorDescription: String){
-        print(errorDescription)
+        popTip.show(text: errorDescription, direction: .up, maxWidth: 220, in: view, from: createAccountButton.frame)
     }
     
     func setupEmailFieldField(){
@@ -99,9 +115,7 @@ class RegisterViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let email = self.emailTextField.text else { return }
-                if Util.isValid(email: email){
-                    self.dismissEmailValidationInformation()
-                }else{
+                if not(Util.isValid(email: email)){
                     self.showEmailValidationInformation()
                 }
                 
@@ -109,11 +123,8 @@ class RegisterViewController: UIViewController {
     }
     
     func showEmailValidationInformation(){
-        print("formato de email incorreto")
-    }
-    
-    func dismissEmailValidationInformation(){
-        print("vc escreveu o email correto")
+        let tip = emailTextField.text!.isEmpty ? "E-mail precisa ser prenchido" : "E-mail incorreto"
+        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: emailTextField.frame)
     }
     
     func setupPasswordTextField(){
@@ -121,19 +132,15 @@ class RegisterViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: { [unowned self] in
                 guard let password = self.passwordTextField.text else { return }
-                if Util.isValid(password: password){
-                    self.dismissPasswordValidationInformation()
-                }else{
+                if not(Util.isValid(password: password)){
                     self.showPasswordValidationInformation()
                 }
             }).disposed(by: disposeBag)
     }
     
     func showPasswordValidationInformation(){
-        print("A senha deverá conter no mínimo 8 caracteres, dos quais deve possuir no mínimo 1 letra, 1 número e 1 caractere especial")
-    }
-    func dismissPasswordValidationInformation(){
-        print("vc escreveu a senha correto")
+        let tip = "Senha precisa conter no mínimo 8 caracteres, conter um número, uma letra maiúscula, uma letra minúscula e um caractere especial"
+        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: passwordTextField.frame)
     }
 }
 

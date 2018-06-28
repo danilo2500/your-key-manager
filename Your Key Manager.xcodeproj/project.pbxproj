@@ -24,6 +24,7 @@
 		55CBC26220E2F1D600CD8F39 /* SaveCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CBC26120E2F1D600CD8F39 /* SaveCredentialViewModel.swift */; };
 		55F7D9DD20E421D50069BBA3 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7D9DC20E421D50069BBA3 /* GradientView.swift */; };
 		55F7D9E420E4413C0069BBA3 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7D9E320E4413C0069BBA3 /* BorderedButton.swift */; };
+		55F7D9EE20E45C5A0069BBA3 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7D9ED20E45C5A0069BBA3 /* Extension+UIView.swift */; };
 		55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9820DDB592004B960D /* AppDelegate.swift */; };
 		55F96D9B20DDB592004B960D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96D9A20DDB592004B960D /* LoginViewController.swift */; };
 		55F96D9E20DDB592004B960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F96D9C20DDB592004B960D /* Main.storyboard */; };
@@ -82,6 +83,7 @@
 		55CBC26120E2F1D600CD8F39 /* SaveCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCredentialViewModel.swift; sourceTree = "<group>"; };
 		55F7D9DC20E421D50069BBA3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		55F7D9E320E4413C0069BBA3 /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
+		55F7D9ED20E45C5A0069BBA3 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		55F96D9520DDB592004B960D /* Your Key Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Key Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F96D9820DDB592004B960D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F96D9A20DDB592004B960D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				9F55F34A20E3DAE700F6E8A7 /* Extension+Bool.swift */,
+				55F7D9ED20E45C5A0069BBA3 /* Extension+UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -561,9 +564,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/GenericPasswordRow/GenericPasswordRow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -575,9 +577,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GenericPasswordRow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -623,6 +624,7 @@
 				55F96D9920DDB592004B960D /* AppDelegate.swift in Sources */,
 				5585501A20DF1B3E00FE3767 /* RegisterViewModel.swift in Sources */,
 				5585503120E04A6100FE3767 /* RealmManager.swift in Sources */,
+				55F7D9EE20E45C5A0069BBA3 /* Extension+UIView.swift in Sources */,
 				55CBC26220E2F1D600CD8F39 /* SaveCredentialViewModel.swift in Sources */,
 				55F96DD020DDF212004B960D /* Constants.swift in Sources */,
 				9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */,
