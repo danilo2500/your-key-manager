@@ -18,6 +18,8 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
     
+    @IBOutlet weak var networkActivityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
@@ -37,6 +39,7 @@ class LoginViewController: UIViewController{
         setupEmailFieldField()
         setupPasswordTextField()
         setupBiometricBarItem()
+        setupActivityIndicator()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,6 +48,14 @@ class LoginViewController: UIViewController{
     
     func setupPopUp() {
         popTip.textAlignment = .left
+    }
+    
+    func setupActivityIndicator() {
+        viewModel.isLoginIn.asObservable().bind(to: networkActivityIndicator.rx.isAnimating).disposed(by: disposeBag)
+        viewModel.isLoginIn.asObservable().subscribe(onNext: { [unowned self] isLoginIn in
+            let title = isLoginIn ? "" : "Entrar"
+            self.signInButton.setTitle(title, for: .normal)
+        }).disposed(by: disposeBag)
     }
     
     func setupReactiveBinds() {
@@ -74,24 +85,26 @@ class LoginViewController: UIViewController{
         }).disposed(by: disposeBag)
         
         signInButton.rx.tap.bind{ [unowned self] in
-            
-            if not(Connectivity.isConnectedToInternet()) {
-                self.showNoInternetConnectionError()
-                return
-            }
-            
-            let email = self.emailTextField.text!
-            let password = self.passwordTextField.text!
-            
-            self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, errorDescription) in
-                if user != nil{
-                    self.showHomeScreen()
-                }
-                if let errorDescription = errorDescription{
-                    self.showErrorFeedback(errorDescription)
-                }
-            })
+            self.signIn()
             }.disposed(by: disposeBag)
+    }
+    
+    func signIn() {
+        if not(Connectivity.isConnectedToInternet()) {
+            self.showNoInternetConnectionError()
+            return
+        }
+        
+        let email = self.emailTextField.text!
+        let password = self.passwordTextField.text!
+        self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, errorDescription) in
+            if user != nil{
+                self.showHomeScreen()
+            }
+            if let errorDescription = errorDescription{
+                self.showErrorFeedback(errorDescription)
+            }
+        })
     }
     
     func showNoInternetConnectionError() {

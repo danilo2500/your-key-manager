@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var networkActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var createAccountButton: UIButton!
     
@@ -30,18 +31,19 @@ class RegisterViewController: UIViewController {
         setupEmailFieldField()
         setupPasswordTextField()
         setupPopUp()
-        
-        popTip.appearHandler = { pop in
-            print("aparecendo")
-        }
-        popTip.dismissHandler = { _ in
-            print("sumindo")
-            
-        }
+        setupActivityIndicator()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func setupActivityIndicator() {
+        viewModel.isCreatingUser.asObservable().bind(to: networkActivityIndicator.rx.isAnimating).disposed(by: disposeBag)
+        viewModel.isCreatingUser.asObservable().subscribe(onNext: { [unowned self] isCreatingAccount in
+            let title = isCreatingAccount ? "" : "Criar nova conta"
+            self.createAccountButton.setTitle(title, for: .normal)
+        }).disposed(by: disposeBag)
     }
     
     func setupPopUp() {
@@ -76,25 +78,33 @@ class RegisterViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         createAccountButton.rx.tap.bind{ [unowned self] in
-            
-            if not(Connectivity.isConnectedToInternet()) {
-                self.showNoInternetConnectionError()
-                return
-            }
-            let email = self.emailTextField.text!
-            let password = self.passwordTextField.text!
-            let name = self.nameTextField.text!
-            
-            self.viewModel.createUser(email: email, password: password, name: name, completion: { [unowned self] (user, errorDescription) in
-                
-                if user != nil {
-                    self.showHomeScreen()
-                }
-                if let errorDescription = errorDescription {
-                    self.showErrorFeedback(errorDescription)
-                }
-            })
+            self.createAccount()
             }.disposed(by: disposeBag)
+    }
+    
+    func createAccount() {
+        if not(Connectivity.isConnectedToInternet()) {
+            self.showNoInternetConnectionError()
+            return
+        }
+        createAccountButton.setTitle("", for: .disabled)
+        networkActivityIndicator.startAnimating()
+        
+        let email = self.emailTextField.text!
+        let password = self.passwordTextField.text!
+        let name = self.nameTextField.text!
+        
+        self.viewModel.createUser(email: email, password: password, name: name, completion: { [unowned self] (user, errorDescription) in
+            self.createAccountButton.setTitle("", for: .disabled)
+            self.networkActivityIndicator.stopAnimating()
+            if user != nil {
+                self.showHomeScreen()
+            }
+            if let errorDescription = errorDescription {
+                self.showErrorFeedback(errorDescription)
+            }
+        })
+        
     }
     
     func showNoInternetConnectionError() {
