@@ -9,15 +9,20 @@
 import UIKit
 import RxSwift
 import Kingfisher
+import AMPopTip
 
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var logOutBarButton: UIBarButtonItem!
+    @IBOutlet weak var noCredentialsFeedbackView: UIView!
+    @IBOutlet weak var addCredentialBarButton: UIBarButtonItem!
+    
     
     @IBOutlet weak var credentialsTableView: UITableView!
     
     let viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
+    let popTip = PopTip()
     
     let apiManagerLocal = DevPeopleAPIManager()
     
@@ -26,8 +31,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        SharedPreference.shared.storeKeyIndicatingUserHaveLogOut()
-        showLoginViewController()
+        showLogOutAlert()
     }
     
     override func viewDidLoad() {
@@ -37,8 +41,9 @@ class HomeViewController: UIViewController {
         
         viewModel.userEmail = viewModel.fetchUserEmail()
         viewModel.createUserOnDatabaseIfNeeded()
-
+        setupNoCredentialsFeedback()
         authenticateTouchIDIfNeeded()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +63,6 @@ class HomeViewController: UIViewController {
     
     func setupReactiveBinds() {
         viewModel.credentials.asObservable().subscribe { [unowned self] (website) in
-            
             self.credentialsTableView.reloadData()
         }.disposed(by: disposeBag)
     }
@@ -85,11 +89,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func showFeedbackWithNoCredentials() {
-        print("usuario nao tem credenciais salvas")
-    }
-    
-    
     func showLoginViewController() {
         let loginNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginNavigationController")
         self.show(loginNavigationController, sender: nil)
@@ -109,6 +108,40 @@ class HomeViewController: UIViewController {
         saveCredentialViewController.viewModel.saveCredentialTask = .updating
         
         navigationController!.pushViewController(saveCredentialViewController, animated: true)
+    }
+    
+    func setupNoCredentialsFeedback() {
+        viewModel.credentials.asObservable().subscribe(onNext: { [unowned self] webCredentials in
+            if webCredentials.isEmpty {
+                self.showFeedbackWithNoCredentials()
+            }else{
+                self.dismissFeedbackWithNoCredentials()
+            }
+        }).disposed(by: disposeBag)
+    }
+    
+    func showFeedbackWithNoCredentials() {
+        noCredentialsFeedbackView.isHidden = false
+    }
+    
+    func dismissFeedbackWithNoCredentials() {
+        noCredentialsFeedbackView.isHidden = true
+        popTip.hide()
+    }
+    
+    func showLogOutAlert() {
+        let alertController = UIAlertController(title: "Sair", message: "Tem certeza que deseja sair da sua conta?", preferredStyle: .alert)
+        
+        let acceptButton = UIAlertAction(title: "Sim", style: .default) { [unowned self] _ in
+            SharedPreference.shared.storeKeyIndicatingUserHaveLogOut()
+            self.showLoginViewController()
+        }
+        let cancelButton = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+        
+        alertController.addAction(acceptButton)
+        alertController.addAction(cancelButton)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
