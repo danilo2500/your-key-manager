@@ -111,7 +111,8 @@ class RegisterViewController: UIViewController {
     }
     
     func showNoInternetConnectionError() {
-        popTip.show(text: "Verifique sua conexão com a internet", direction: .up, maxWidth: 220, in: view, from: createAccountButton.frame)
+        let tip = "Verifique sua conexão com a internet"
+        showPopUpTip(tip, inView: createAccountButton)
     }
     
     func showHomeScreen(){
@@ -120,7 +121,7 @@ class RegisterViewController: UIViewController {
     }
     
     func showErrorFeedback(_ errorDescription: String){
-        popTip.show(text: errorDescription, direction: .up, maxWidth: 220, in: view, from: createAccountButton.frame)
+        showPopUpTip(errorDescription, inView: createAccountButton)
     }
     
     func setupEmailFieldField(){
@@ -137,7 +138,7 @@ class RegisterViewController: UIViewController {
     
     func showEmailValidationInformation(){
         let tip = emailTextField.text!.isEmpty ? "E-mail precisa ser prenchido" : "E-mail incorreto"
-        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: emailTextField.frame)
+        showPopUpTip(tip, inView: emailTextField)
     }
     
     func setupPasswordTextField(){
@@ -153,7 +154,12 @@ class RegisterViewController: UIViewController {
     
     func showPasswordValidationInformation(){
         let tip = "Senha precisa conter no mínimo 8 caracteres, conter um número, uma letra maiúscula, uma letra minúscula e um caractere especial"
-        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: passwordTextField.frame)
+        showPopUpTip(tip, inView: passwordTextField)
+    }
+    
+    func showPopUpTip(_ tip: String, inView view: UIView) {
+        let superView = view.superview!
+        popTip.show(text: tip, direction: .up, maxWidth: 220, in: superView, from: view.frame)
     }
 }
 

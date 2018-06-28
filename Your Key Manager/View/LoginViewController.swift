@@ -114,12 +114,13 @@ class LoginViewController: UIViewController{
     }
     
     func showNoInternetConnectionError() {
-        popTip.show(text: "Verifique sua conexão com a internet", direction: .up, maxWidth: 220, in: view, from: signInButton.frame)
+        let tip = "Verifique sua conexão com a internet"
+        showPopUpTip(tip, inView: signInButton)
     }
     
     func showErrorFeedback(_ errorDescription: String) {
-        popTip.show(text: errorDescription, direction: .up, maxWidth: 220, in: view, from: signInButton.frame)
-        
+        showPopUpTip(errorDescription, inView: signInButton)
+
     }
     
     func showHomeScreen() {
@@ -158,7 +159,7 @@ class LoginViewController: UIViewController{
     
     func showEmailValidationInformation() {
         let tip = emailTextField.text!.isEmpty ? "E-mail precisa ser prenchido" : "E-mail incorreto"
-        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: emailTextField.frame)
+        showPopUpTip(tip, inView: emailTextField)
     }
     
     func setupPasswordTextField() {
@@ -175,7 +176,7 @@ class LoginViewController: UIViewController{
     
     func showPasswordValidationInformation() {
         let tip = "Senha precisa conter:\n8 caracteres;\nUm número;\nUma letra maiúscula;\nUma letra minúscula;\nUm caractere especial."
-        popTip.show(text: tip, direction: .up, maxWidth: 220, in: view, from: passwordTextField.frame)
+        showPopUpTip(tip, inView: passwordTextField)
     }
 
     func setupBiometricBarItem() {
@@ -201,7 +202,12 @@ class LoginViewController: UIViewController{
             }
         }
     }
-
+    
+    func showPopUpTip(_ tip: String, inView view: UIView) {
+        let superView = view.superview!
+        popTip.show(text: tip, direction: .up, maxWidth: 220, in: superView, from: view.frame)
+    }
+    
 }
 
 
