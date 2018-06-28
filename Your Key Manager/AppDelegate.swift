@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let userIsLogIn = SharedPreference.shared.isLoggedIn()
         let initialViewControllerIndetifier = userIsLogIn ? "homeNavigationController" : "loginNavigationController"
-        let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: initialViewControllerIndetifier)
+        let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: initialViewControllerIndetifier) as! UINavigationController
+        
         window!.rootViewController = initialViewController
         
         return true

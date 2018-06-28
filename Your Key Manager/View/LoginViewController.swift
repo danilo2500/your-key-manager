@@ -23,7 +23,7 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
-    @IBOutlet weak var biometryBarItem: UIBarButtonItem!
+    @IBOutlet weak var biometryButton: UIButton!
     
     let viewModel = LoginViewModel()
     let disposeBag = DisposeBag()
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController{
         setupEmailFieldField()
         setupPasswordTextField()
         setupBiometricBarItem()
-        setupActivityIndicator()
+        setupNetworkReactiveBinds()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -50,11 +50,16 @@ class LoginViewController: UIViewController{
         popTip.textAlignment = .left
     }
     
-    func setupActivityIndicator() {
+    func setupNetworkReactiveBinds() {
         viewModel.isLoginIn.asObservable().bind(to: networkActivityIndicator.rx.isAnimating).disposed(by: disposeBag)
         viewModel.isLoginIn.asObservable().subscribe(onNext: { [unowned self] isLoginIn in
             let title = isLoginIn ? "" : "Entrar"
-            self.signInButton.setTitle(title, for: .normal)
+            DispatchQueue.main.async {
+                self.emailTextField.isEnabled = not(isLoginIn)
+                self.passwordTextField.isEnabled = not(isLoginIn)
+                self.signInButton.setTitle(title, for: .normal)
+            }
+
         }).disposed(by: disposeBag)
     }
     
@@ -86,18 +91,18 @@ class LoginViewController: UIViewController{
         }).disposed(by: disposeBag)
         
         signInButton.rx.tap.bind{ [unowned self] in
-            self.signIn()
+            let email = self.emailTextField.text!
+            let password = self.passwordTextField.text!
+            self.signIn(email: email, password: password)
             }.disposed(by: disposeBag)
     }
     
-    func signIn() {
+    func signIn(email: String, password: String) {
         if not(Connectivity.isConnectedToInternet()) {
             self.showNoInternetConnectionError()
             return
         }
-        
-        let email = self.emailTextField.text!
-        let password = self.passwordTextField.text!
+
         self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, errorDescription) in
             if user != nil{
                 self.showHomeScreen()
@@ -113,7 +118,8 @@ class LoginViewController: UIViewController{
     }
     
     func showErrorFeedback(_ errorDescription: String) {
-        print(errorDescription)
+        popTip.show(text: errorDescription, direction: .up, maxWidth: 220, in: view, from: signInButton.frame)
+        
     }
     
     func showHomeScreen() {
@@ -174,14 +180,9 @@ class LoginViewController: UIViewController{
 
     func setupBiometricBarItem() {
         
-        if SharedPreference.shared.hasLoginKeyStored() && BiometricIDAuth().isBiometricIDSupported(){
-            biometryBarItem.isEnabled = true
-        }else{
-            biometryBarItem.isEnabled = false
-        }
+        biometryButton.isHidden = viewModel.shouldHideBiometryOptions()
         
-        biometryBarItem.rx.tap.subscribe(onNext: { [unowned self] event in
-            
+        biometryButton.rx.tap.subscribe(onNext: { [unowned self] _ in
             self.displayBiometryAuth()
         }).disposed(by: disposeBag)
     }
@@ -191,34 +192,14 @@ class LoginViewController: UIViewController{
         let biometricIDAuth = BiometricIDAuth()
         biometricIDAuth.authenticateUser(touchIDReason: touchIDReason){ [unowned self] (sucess, error) in
             if sucess {
-                self.loginAutomaticallyUsingEmailOnKeychain()
+                let email = SharedPreference.shared.getStoredEmail()!
+                let password = KeychainManager.shared.getUserPassword(email: email)!
+                self.signIn(email: email, password: password)
             }
             if let error = error {
                 print(biometricIDAuth.getTouchIDErrorMessage(error))
             }
         }
-    }
-    
-    func loginAutomaticallyUsingEmailOnKeychain() {
-        
-        if not(Connectivity.isConnectedToInternet()) {
-            self.showNoInternetConnectionError()
-            return
-        }
-        
-        guard let email = SharedPreference.shared.getStoredEmail(), let password = KeychainManager.shared.getUserPassword(email: email) else {
-            fatalError("No password or email saved correctly")
-        }
-        
-        self.viewModel.signIn(email: email, password: password, completion: { [unowned self] (user, error) in
-            if user != nil{
-                self.showHomeScreen()
-            }
-            if let error = error{
-                self.showErrorFeedback(error)
-            }
-        })
-        
     }
 
 }

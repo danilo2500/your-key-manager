@@ -54,6 +54,14 @@ class LoginViewModel {
         return SharedPreference.shared.getStoredEmail()
     }
     
+    func shouldHideBiometryOptions() -> Bool {
+        let hasLoginKeyStored = SharedPreference.shared.hasLoginKeyStored()
+        let isBiometricIDSupported = BiometricIDAuth().isBiometricIDSupported()
+        let userAlreadyAuthenticatedOnTouchID = SharedPreference.shared.userAlreadyAuthenticatedOnTouchID()
+        let canSupportBiometry = hasLoginKeyStored && isBiometricIDSupported && userAlreadyAuthenticatedOnTouchID
+        return not(canSupportBiometry)
+    }
+    
 }
 
 

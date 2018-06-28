@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class BorderedButton: UIButton {
 
     override func draw(_ rect: CGRect) {

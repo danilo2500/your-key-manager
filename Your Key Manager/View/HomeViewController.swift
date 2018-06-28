@@ -34,7 +34,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupReactiveBinds()
-
         
         viewModel.userEmail = viewModel.fetchUserEmail()
         viewModel.createUserOnDatabaseIfNeeded()
@@ -71,7 +70,6 @@ class HomeViewController: UIViewController {
         biometricIDAuth.authenticateUser(touchIDReason: touchIDReason) { (sucess, error) in
             if sucess{
                 SharedPreference.shared.registerUserAuthenticationOnTouchID()
-                print("TOUCH ID CADASTRADO, Agora vc pode logar usando o touch ID")
             }
             if let error = error {
                 print(error)
