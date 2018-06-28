@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lbf-rz-mzd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SMw-U8-357">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -649,14 +649,17 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vr5-0y-uWQ">
                                                 <rect key="frame" x="0.0" y="162" width="295" height="90"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oD1-ug-3hz">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oD1-ug-3hz">
                                                         <rect key="frame" x="0.0" y="0.0" width="295" height="44"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="Dcz-KZ-Gij">
                                                                 <rect key="frame" x="0.0" y="10" width="24" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="24" id="fQg-Nz-BGJ"/>
+                                                                </constraints>
                                                             </imageView>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rBc-0I-kFs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                <rect key="frame" x="34" y="0.0" width="261" height="44"/>
+                                                                <rect key="frame" x="34" y="0.0" width="227" height="44"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
@@ -674,6 +677,13 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Senha"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWl-Ls-bK1">
+                                                                <rect key="frame" x="271" y="10" width="24" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="24" id="SO0-P1-9CE"/>
+                                                                </constraints>
+                                                                <state key="normal" image="copy"/>
+                                                            </button>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRR-3W-6Da" customClass="BorderedButton" customModule="Your_Key_Manager" customModuleProvider="target">
@@ -740,6 +750,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="URLTextField" destination="QyI-4Q-rAG" id="0oR-uq-h2O"/>
+                        <outlet property="copyButton" destination="yWl-Ls-bK1" id="xgg-BG-saB"/>
                         <outlet property="emailTextField" destination="gPN-SP-S6F" id="UAW-Xo-f5k"/>
                         <outlet property="nameTextField" destination="N9F-c5-HFn" id="iJk-i0-gtZ"/>
                         <outlet property="passwordTextField" destination="rBc-0I-kFs" id="eeP-9C-AD6"/>
@@ -799,6 +810,7 @@
     <resources>
         <image name="Key2" width="128" height="128"/>
         <image name="Touch-icon-lg" width="138" height="137"/>
+        <image name="copy" width="24" height="24"/>
         <image name="email" width="24" height="24"/>
         <image name="key" width="256" height="256"/>
         <image name="lock" width="24" height="24"/>

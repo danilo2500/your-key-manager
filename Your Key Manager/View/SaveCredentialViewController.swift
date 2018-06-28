@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import AMPopTip
 
 class SaveCredentialViewController: UIViewController {
     
@@ -17,9 +18,11 @@ class SaveCredentialViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var showHidePasswordButton: UIButton!
+    @IBOutlet weak var copyButton: UIButton!
     
     let viewModel = SaveCredentialViewModel()
     let disposeBag = DisposeBag()
+    let popTip = PopTip()
     
     @IBAction func saveButtonAction(_ sender: Any) {
         let email = emailTextField.text!
@@ -35,7 +38,6 @@ class SaveCredentialViewController: UIViewController {
         passwordTextField.isSecureTextEntry.toggle()
         let title = passwordTextField.isSecureTextEntry ? "Mostrar Senha" : "Ocultar Senha"
         showHidePasswordButton.setTitle(title, for: .normal)
-        
     }
     
     
@@ -45,6 +47,7 @@ class SaveCredentialViewController: UIViewController {
         setupReactiveBinds()
         setupTextFieldsWithValuesIfNeeded()
         setupNavigationTitle()
+        setupCopyButton()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -101,7 +104,39 @@ class SaveCredentialViewController: UIViewController {
         passwordTextField.text = viewModel.password.value
         nameTextField.text = viewModel.name.value
         URLTextField.text = viewModel.URL.value
+    }
+    
+    func setupCopyButton() {
+        passwordTextField.rx.text.asObservable().subscribe(onNext: { [unowned self] (password) in
+            if password!.isEmpty {
+                self.dismissCopyButton()
+            } else {
+                self.showCopyButton()
+            }
+        }).disposed(by: disposeBag)
         
-        
+        copyButton.rx.tap.bind{ [unowned self] in
+            let password = self.passwordTextField.text!
+            self.viewModel.copyToClipboard(text: password)
+            self.showPopUpTip("Senha copiada para área de transferencia", inView: self.passwordTextField)
+            }.disposed(by: disposeBag)
+    }
+    
+    func showCopyButton() {
+        self.copyButton.isHidden = false
+    }
+    
+    func dismissCopyButton() {
+        self.copyButton.isHidden = true
+    }
+    
+    func showPopUpTip(_ tip: String, inView view: UIView) {
+        let superView = view.superview!
+        popTip.bubbleColor = .white
+        popTip.textColor = .black
+        popTip.show(text: tip, direction: .up, maxWidth: 200, in: superView, from: view.frame)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
+            self.popTip.hide()
+        }
     }
 }

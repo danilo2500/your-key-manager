@@ -68,4 +68,8 @@ class SaveCredentialViewModel {
         RealmManager.shared.update(webCredential: updatedWebCredential, withEmail: email, name: name, url: url )
         KeychainManager.shared.storeWebsitePassword(credentialID: updatedWebCredential.id, password: password)
     }
+    
+    func copyToClipboard(text: String) {
+        UIPasteboard.general.string = text
+    }
 }
