@@ -14,7 +14,6 @@ target 'Your Key Manager' do
   pod ‘RealmSwift’
   pod 'SkyFloatingLabelTextField'
   pod 'AMPopTip'
-  pod 'RxKeyboard'
   pod 'IQKeyboardManagerSwift'
 
   target 'Your Key ManagerTests' do

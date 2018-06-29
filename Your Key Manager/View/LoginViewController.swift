@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import SkyFloatingLabelTextField
 import AMPopTip
-import RxKeyboard
+import IQKeyboardManagerSwift
 
 class LoginViewController: UIViewController{
     
@@ -40,7 +40,6 @@ class LoginViewController: UIViewController{
         setupPasswordTextField()
         setupBiometricBarItem()
         setupNetworkReactiveBinds()
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
