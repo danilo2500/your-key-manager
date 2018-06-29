@@ -12,6 +12,7 @@ import XCTest
 class Your_Key_ManagerTests: XCTestCase {
     
     override func setUp() {
+        
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -21,16 +22,35 @@ class Your_Key_ManagerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testEmailValidation() {
+        let email = "wrongformat@mail"
+        let isValidEmail = Util.isValid(email: email)
+        XCTAssertFalse(isValidEmail)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testCorrectEmailValidation() {
+        let email = "name@mail.com"
+        let isValidEmail = Util.isValid(email: email)
+        XCTAssertTrue(isValidEmail)
     }
     
+    func testWrongPassword() {
+        let password = "wrong password"
+        let isValidPassword = Util.isValid(password: password)
+        XCTAssertFalse(isValidPassword)
+    }
+    
+    func testCorrectPassword() {
+        let password = "12345@Aa"
+        let isValidPassword = Util.isValid(password: password)
+        XCTAssertTrue(isValidPassword)
+    }
+    
+    func testPasswordSaving() {
+        let password = "12345@Aa"
+        KeychainManager.shared.storeUserPassword(email: "test@mail.com", password: "12345@Aa")
+        let requestedPassword = KeychainManager.shared.getUserPassword(email: "test@mail.com")
+        
+        XCTAssertEqual(password, requestedPassword)
+    }
 }
