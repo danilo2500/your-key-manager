@@ -53,10 +53,4 @@ class Your_Key_ManagerTests: XCTestCase {
         
         XCTAssertEqual(password, requestedPassword)
     }
-    
-    func test() {
-        
-        
-    }
-
 }
