@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import AMPopTip
 
+
 class SaveCredentialViewController: UIViewController {
     
     @IBOutlet weak var URLTextField: UITextField!
@@ -19,6 +20,7 @@ class SaveCredentialViewController: UIViewController {
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var showHidePasswordButton: UIButton!
     @IBOutlet weak var copyButton: UIButton!
+    
     
     let viewModel = SaveCredentialViewModel()
     let disposeBag = DisposeBag()
@@ -48,6 +50,7 @@ class SaveCredentialViewController: UIViewController {
         setupTextFieldsWithValuesIfNeeded()
         setupNavigationTitle()
         setupCopyButton()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -139,4 +142,5 @@ class SaveCredentialViewController: UIViewController {
             self.popTip.hide()
         }
     }
+    
 }

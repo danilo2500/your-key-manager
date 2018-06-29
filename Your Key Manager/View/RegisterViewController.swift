@@ -10,12 +10,14 @@ import AMPopTip
 import RxSwift
 import SkyFloatingLabelTextField
 
+
 class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var networkActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var contentAreaStackView: UIStackView!
     
     @IBOutlet weak var createAccountButton: UIButton!
     
@@ -161,6 +163,7 @@ class RegisterViewController: UIViewController {
         let superView = view.superview!
         popTip.show(text: tip, direction: .up, maxWidth: 220, in: superView, from: view.frame)
     }
+    
 }
 
 

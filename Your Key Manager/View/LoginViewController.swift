@@ -11,13 +11,13 @@ import RxSwift
 import RxCocoa
 import SkyFloatingLabelTextField
 import AMPopTip
-
+import RxKeyboard
 
 class LoginViewController: UIViewController{
     
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
-    
+
     @IBOutlet weak var networkActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var signInButton: UIButton!
@@ -40,6 +40,7 @@ class LoginViewController: UIViewController{
         setupPasswordTextField()
         setupBiometricBarItem()
         setupNetworkReactiveBinds()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -207,6 +208,15 @@ class LoginViewController: UIViewController{
         let superView = view.superview!
         popTip.show(text: tip, direction: .up, maxWidth: 220, in: superView, from: view.frame)
     }
+    
+//    func setupKeyboard() {
+//        RxKeyboard.instance.frame.asObservable().subscribe(onNext: { [unowned self] (keyboardFrame) in
+//            let textFieldPosition = self.passwordTextField.convert(self.passwordTextField.bounds, to: self.view)
+//            if keyboardFrame.intersects(textFieldPosition) {
+//                self.contentAreaStackView.frame.origin.y = self.view.frame.height - self.contentAreaStackView.frame.height - keyboardFrame.height
+//            }
+//        }).disposed(by: disposeBag)
+//    }
     
 }
 
