@@ -39,7 +39,6 @@
 		55F96DD620DED4B5004B960D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD520DED4B5004B960D /* LoginViewModel.swift */; };
 		55F96DD820DEDB90004B960D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F96DD720DEDB90004B960D /* Util.swift */; };
 		6B9E866DC4A0D2095C21680A /* Pods_Your_Key_ManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B756645BCA009B621DFCD1E /* Pods_Your_Key_ManagerUITests.framework */; };
-		9F4E4E8920E665F300F30E07 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4E8820E665F300F30E07 /* LoginViewModelTests.swift */; };
 		9F55F34B20E3DAE700F6E8A7 /* Extension+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F55F34A20E3DAE700F6E8A7 /* Extension+Bool.swift */; };
 		9F96CFA320E27505009A48FC /* CredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */; };
 		9F96CFA520E2796B009A48FC /* SharedPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96CFA420E2796B009A48FC /* SharedPreference.swift */; };
@@ -108,7 +107,6 @@
 		679EAA4C26E5E07AA93E1DE0 /* Pods_Your_Key_ManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_ManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		816027411A70E7D1F35261EC /* Pods-Your Key Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your Key Manager.release.xcconfig"; path = "Pods/Target Support Files/Pods-Your Key Manager/Pods-Your Key Manager.release.xcconfig"; sourceTree = "<group>"; };
 		94B257D71AB51E97C6E4CD15 /* Pods_Your_Key_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Key_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F4E4E8820E665F300F30E07 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		9F55F34A20E3DAE700F6E8A7 /* Extension+Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Bool.swift"; sourceTree = "<group>"; };
 		9F96CFA220E27505009A48FC /* CredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialTableViewCell.swift; sourceTree = "<group>"; };
 		9F96CFA420E2796B009A48FC /* SharedPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreference.swift; sourceTree = "<group>"; };
@@ -166,13 +164,6 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
-		55F7D9DE20E42A690069BBA3 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		55F96D8C20DDB592004B960D = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +194,6 @@
 				55F96DC820DDB5BF004B960D /* ViewModel */,
 				55F96DCE20DDF1C8004B960D /* Supporting Files */,
 				9F55F34920E3DAD600F6E8A7 /* Extensions */,
-				55F7D9DE20E42A690069BBA3 /* Fonts */,
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
 				55F96D9F20DDB592004B960D /* Assets.xcassets */,
 				55F96DA420DDB592004B960D /* Info.plist */,
@@ -215,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				55F96DAD20DDB592004B960D /* Your_Key_ManagerTests.swift */,
-				9F4E4E8820E665F300F30E07 /* LoginViewModelTests.swift */,
 				55F96DAF20DDB592004B960D /* Info.plist */,
 			);
 			path = "Your Key ManagerTests";
@@ -658,7 +647,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F4E4E8920E665F300F30E07 /* LoginViewModelTests.swift in Sources */,
 				55F96DAE20DDB592004B960D /* Your_Key_ManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
