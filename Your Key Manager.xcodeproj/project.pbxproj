@@ -166,13 +166,6 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
-		55F7D9DE20E42A690069BBA3 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		55F96D8C20DDB592004B960D = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +196,6 @@
 				55F96DC820DDB5BF004B960D /* ViewModel */,
 				55F96DCE20DDF1C8004B960D /* Supporting Files */,
 				9F55F34920E3DAD600F6E8A7 /* Extensions */,
-				55F7D9DE20E42A690069BBA3 /* Fonts */,
 				55F96D9820DDB592004B960D /* AppDelegate.swift */,
 				55F96D9F20DDB592004B960D /* Assets.xcassets */,
 				55F96DA420DDB592004B960D /* Info.plist */,
