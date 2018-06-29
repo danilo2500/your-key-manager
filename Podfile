@@ -15,6 +15,7 @@ target 'Your Key Manager' do
   pod 'SkyFloatingLabelTextField'
   pod 'AMPopTip'
   pod 'RxKeyboard'
+  pod 'IQKeyboardManagerSwift'
 
   target 'Your Key ManagerTests' do
     inherit! :search_paths

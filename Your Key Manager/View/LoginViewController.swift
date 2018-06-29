@@ -25,7 +25,7 @@ class LoginViewController: UIViewController{
     
     @IBOutlet weak var biometryButton: UIButton!
     
-    let viewModel = LoginViewModel()
+    let viewModel = LoginViewModel(apiManager: DevPeopleAPIManager.shared )
     let disposeBag = DisposeBag()
     let popTip = PopTip()
     
@@ -208,15 +208,6 @@ class LoginViewController: UIViewController{
         let superView = view.superview!
         popTip.show(text: tip, direction: .up, maxWidth: 220, in: superView, from: view.frame)
     }
-    
-//    func setupKeyboard() {
-//        RxKeyboard.instance.frame.asObservable().subscribe(onNext: { [unowned self] (keyboardFrame) in
-//            let textFieldPosition = self.passwordTextField.convert(self.passwordTextField.bounds, to: self.view)
-//            if keyboardFrame.intersects(textFieldPosition) {
-//                self.contentAreaStackView.frame.origin.y = self.view.frame.height - self.contentAreaStackView.frame.height - keyboardFrame.height
-//            }
-//        }).disposed(by: disposeBag)
-//    }
     
 }
 

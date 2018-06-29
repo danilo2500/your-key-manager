@@ -4,7 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fontAwesome.otf</string>
+		<string>LANEPOSH.ttf</string>
 	</array>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use Face ID to Login</string>

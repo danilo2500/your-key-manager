@@ -14,7 +14,7 @@ class Your_Key_ManagerUITests: XCTestCase {
         super.setUp()
         
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
@@ -32,13 +32,18 @@ class Your_Key_ManagerUITests: XCTestCase {
         
         let app = XCUIApplication()
         XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["Clear text"]/*[[".textFields[\"E-mail\"].buttons[\"Clear text\"]",".buttons[\"Clear text\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let returnButton = app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"retorno\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+        
+
         let eMailTextField = app.textFields["E-mail"]
         eMailTextField.tap()
         eMailTextField.typeText("test@hotmail.com")
+        returnButton.tap()
         
         let senhaSecureTextField = app.secureTextFields["Senha"]
         senhaSecureTextField.tap()
         senhaSecureTextField.typeText("12345678910aA@")
+        returnButton.tap()
         app.buttons["Entrar"].tap()
         
     }

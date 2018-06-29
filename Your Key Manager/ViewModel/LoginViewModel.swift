@@ -13,7 +13,11 @@ import Alamofire
 
 class LoginViewModel {
     
-    let apiManager = DevPeopleAPIManager()
+    var apiManager: DevPeopleAPIManager!
+    
+    init(apiManager: DevPeopleAPIManager) {
+        self.apiManager = apiManager
+    }
     
     var email = Variable<String>("")
     var password = Variable<String>("")

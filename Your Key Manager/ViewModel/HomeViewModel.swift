@@ -15,7 +15,11 @@ import Moya
 class HomeViewModel {
     private let realmManager = RealmManager.shared
     private var userToken: String? = nil
-    let apiManager = DevPeopleAPIManager()
+    var apiManager: DevPeopleAPIManager!
+    
+    init(apiManager: DevPeopleAPIManager) {
+        self.apiManager = apiManager
+    }
     
     var userEmail: String! = nil
     var credentials: Variable<[WebsiteCredential]> = Variable([])

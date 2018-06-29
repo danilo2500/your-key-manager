@@ -21,7 +21,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var createAccountButton: UIButton!
     
-    let viewModel = RegisterViewModel()
+    let viewModel = RegisterViewModel(apiManager: DevPeopleAPIManager.shared)
     let disposeBag = DisposeBag()
     let popTip = PopTip()
     

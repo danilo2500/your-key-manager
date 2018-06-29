@@ -10,11 +10,15 @@ import Moya
 import RxSwift
 
 class DevPeopleAPIManager {
+    static let shared = DevPeopleAPIManager()
+    
+    private init() {}
     
     private let devPeopleProvider = MoyaProvider<DevPeopleAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
     private let disposeBag = DisposeBag()
-    
+
     func signIn(email: String, password: String, completion: @escaping (User?, String?) -> Void) {
+        
         devPeopleProvider.rx.request(.signIn(email: email, password: password))
             .filterSuccessfulStatusCodes()
             .map(User.self)

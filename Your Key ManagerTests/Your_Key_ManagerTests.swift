@@ -12,6 +12,7 @@ import XCTest
 class Your_Key_ManagerTests: XCTestCase {
     
     override func setUp() {
+        
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -19,31 +20,6 @@ class Your_Key_ManagerTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
-    
-
-    func testLogin() {
-        let devPeopleAPIManager = DevPeopleAPIManager()
-        
-        if Connectivity.isConnectedToInternet() {
-            devPeopleAPIManager.signIn(email: "teste@hotmail.com", password: "12345678910aA@") { (user, error) in
-                XCTAssertNil(error, error!)
-            }
-        } else {
-            XCTFail("No internet connection to complete this test")
-        }
-    }
-    
-    func testCreatAccount() {
-        let devPeopleAPIManager = DevPeopleAPIManager()
-        if Connectivity.isConnectedToInternet() {
-            let randomString = NSUUID().uuidString
-            devPeopleAPIManager.createUser(email: "\(randomString)@mail.com", password: "12345678910aA@", name: "TEST", completion: { (user, error) in
-                XCTAssertNil(error, error!)
-            })
-        } else {
-            XCTFail("No internet connection to complete this test")
-        }
     }
     
     func testEmailValidation() {
@@ -70,24 +46,6 @@ class Your_Key_ManagerTests: XCTestCase {
         XCTAssertTrue(isValidPassword)
     }
     
-    func testUserToken() {
-        let devPeopleAPIManager = DevPeopleAPIManager()
-        
-        if Connectivity.isConnectedToInternet() {
-            devPeopleAPIManager.signIn(email: "teste@hotmail.com", password: "12345678910aA@") { (user, error) in
-                
-                if let user = user {
-                    devPeopleAPIManager.requestLogo(websiteUrl: "google.com", token: user.token, completion: { (image, errorDescription) in
-                        XCTAssertNotNil(image)
-                    })
-                }
-                
-            }
-        } else {
-            XCTFail("No internet connection to complete this test")
-        }
-    }
-    
     func testPasswordSaving() {
         let password = "12345@Aa"
         KeychainManager.shared.storeUserPassword(email: "test@mail.com", password: "12345@Aa")
@@ -96,9 +54,9 @@ class Your_Key_ManagerTests: XCTestCase {
         XCTAssertEqual(password, requestedPassword)
     }
     
-    func testDatabaseInsertOperations() {
-        RealmManager.shared.createUser(email: "test@mail.com", token: "")
-        RealmManager.shared.createWebsiteCredential(email: "test@mail.com", url: "test.com", name: "test")
+    func test() {
+        
+        
     }
-  
+
 }

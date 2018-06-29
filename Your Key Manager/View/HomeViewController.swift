@@ -20,11 +20,11 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var credentialsTableView: UITableView!
     
-    let viewModel = HomeViewModel()
+    let viewModel = HomeViewModel(apiManager: DevPeopleAPIManager.shared)
     let disposeBag = DisposeBag()
     let popTip = PopTip()
     
-    let apiManagerLocal = DevPeopleAPIManager()
+    let apiManagerLocal = DevPeopleAPIManager.shared
     
     @IBAction func addNewCredential(_ sender: Any) {
         showSaveCredentialViewController()
@@ -130,7 +130,7 @@ class HomeViewController: UIViewController {
     }
     
     func showLogOutAlert() {
-        let alertController = UIAlertController(title: "Sair", message: "Tem certeza que deseja sair da sua conta?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Deslogar", message: "Tem certeza que deseja sair da sua conta?", preferredStyle: .alert)
         
         let acceptButton = UIAlertAction(title: "Sim", style: .default) { [unowned self] _ in
             self.showLoginViewController()
