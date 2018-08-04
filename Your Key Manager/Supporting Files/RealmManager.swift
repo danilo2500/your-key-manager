@@ -16,7 +16,7 @@ class RealmManager {
         do {
             realm = try Realm()
         } catch let error {
-            fatalError(error.localizedDescription)
+            fatalError(error)
         }
     }
 
